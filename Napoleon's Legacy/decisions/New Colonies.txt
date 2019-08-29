@@ -1,60 +1,47 @@
 political_decisions = {
 
     organize_nigeria = {
-        picture = map_nigeria
+        picture = map_africa
         potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
             civilized = yes
             NOT = {
                 has_global_flag = nigeria_organized
-                capital_scope = { continent = africa }
+                AND = {
+					capital_scope = { continent = africa }
+					NOT = { tag = SAF }
+				}
             }
             OR = {
+                owns = 1926
                 owns = 1934
                 owns = 1928
-                owns = 1945
-                owns = 1923
-                owns = 1941
-                owns = 1943
             }
         }
 
         allow = {
             war = no
-            machine_guns = 1
-            market_regulations = 1
-            OR = {
-                FRA_1923 = { owned_by = THIS }
-                FRA_1930 = { owned_by = THIS }
-            }
-            OR = {
-                SOK_1934 = { owned_by = THIS }
-                SOK_1937 = { owned_by = THIS }
-            }
-            OR = {
-                FRA_1927 = { owned_by = THIS }
-                SOK_1945 = { owned_by = THIS }
-            }
+            revolution_n_counterrevolution = 1
+            owns = 1926
+            owns = 1934
+            owns = 1928
         }
 
         effect = {
             set_global_flag = nigeria_organized
-            set_country_flag = nigeria_master
-            prestige = 5
-            country_event = 199038
-
-            FRA_1923 = { add_core = NGR }
-            FRA_1930 = { add_core = NGR }
-            SOK_1934 = { add_core = NGR }
-            SOK_1937 = { add_core = NGR }
-            FRA_1927 = { add_core = NGR }
-            SOK_1945 = { add_core = NGR }
+            prestige = 10
 
             any_owned = {
-                limit = { is_core = NGR }
+                limit = {
+                    OR = {
+                        region = FRA_1923
+                        region = FRA_1930
+                        region = SOK_1934
+                        region = SOK_1945
+                        region = FRA_1927
+                        region = SOK_1937
+                    }
+                }
+                add_core = NGR
                 remove_core = NIG
                 remove_core = SOK
                 remove_core = DND
@@ -65,14 +52,38 @@ political_decisions = {
                 remove_core = CLA
                 remove_core = WRI
                 remove_core = KBO
+                add_province_modifier = { name = colonial_exploitation duration = 1095 }
             }
 
             SOK_1934 = { add_core = ARO }
 
+            ARO = {
+                government = presidential_dictatorship
+                tech_school = unciv_tech_school
+                nationalvalue = nv_tradition
+                clr_country_flag = sunni_country
+                clr_country_flag = shiite_country
+                clr_country_flag = ibadi_country
+                clr_country_flag = catholic_country
+                clr_country_flag = protestant_country
+                clr_country_flag = mormon_country
+                clr_country_flag = orthodox_country
+                clr_country_flag = coptic_country
+                clr_country_flag = jewish_country
+                clr_country_flag = yazidi_country
+                clr_country_flag = mahayana_country
+                clr_country_flag = gelugpa_country
+                clr_country_flag = theravada_country
+                clr_country_flag = hindu_country
+                clr_country_flag = shinto_country
+                clr_country_flag = sikh_country
+                clr_country_flag = animist_country
+            }
+
             NGR = {
                 primary_culture = THIS
                 add_accepted_culture = yoruba
-                tech_school = developing_tech_school
+                tech_school = unciv_tech_school
                 set_country_flag = post_colonial_country
                 clr_country_flag = sunni_country
                 clr_country_flag = shiite_country
@@ -131,43 +142,15 @@ political_decisions = {
             random_owned = { limit = { owner = { has_country_flag = jewish_country } } ARO = { religion = jewish set_country_flag = jewish_country } }
             random_owned = { limit = { owner = { has_country_flag = ibadi_country } } ARO = { religion = ibadi set_country_flag = ibadi_country } }
             random_owned = { limit = { owner = { has_country_flag = yazidi_country } } ARO = { religion =  yazidi set_country_flag = yazidi_country } }
-
-            ARO = {
-                government = presidential_dictatorship
-                tech_school = developing_tech_school
-                nationalvalue = nv_tradition
-                clr_country_flag = sunni_country
-                clr_country_flag = shiite_country
-                clr_country_flag = ibadi_country
-                clr_country_flag = catholic_country
-                clr_country_flag = protestant_country
-                clr_country_flag = mormon_country
-                clr_country_flag = orthodox_country
-                clr_country_flag = coptic_country
-                clr_country_flag = jewish_country
-                clr_country_flag = yazidi_country
-                clr_country_flag = mahayana_country
-                clr_country_flag = gelugpa_country
-                clr_country_flag = theravada_country
-                clr_country_flag = hindu_country
-                clr_country_flag = shinto_country
-                clr_country_flag = sikh_country
-                clr_country_flag = animist_country
-            }
         }
-        ai_will_do = { factor = 1 }
     }
 
     reorganize_nigeria = {
-        picture = map_nigeria
+        picture = map_africa
         potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
             civilized = yes
             has_global_flag = nigeria_organized
-            owns = 1923
+            owns = 1926
             owns = 1934
             owns = 1928
             NGR = {
@@ -175,27 +158,28 @@ political_decisions = {
                 NOT = { is_culture_group = THIS }
             }
             NOT = {
-                has_country_flag = nigeria_master
-                capital_scope = { continent = africa }
+                AND = {
+					capital_scope = { continent = africa }
+					NOT = { tag = SAF }
+				}
             }
         }
 
         allow = {
             war = no
-            machine_guns = 1
-            market_regulations = 1
-            owns = 1923
+            revolution_n_counterrevolution = 1
+            owns = 1926
             owns = 1934
             owns = 1928
-            owns = 1945
         }
 
         effect = {
             prestige = 3
-            any_country = { limit = { has_country_flag = nigeria_master } clr_country_flag = nigeria_master }
-            set_country_flag = nigeria_master
-            country_event = 199038
 
+            any_pop = {
+                limit = { location = { is_core = NGR } }
+                militancy = -3
+            }
             any_owned = {
                 limit = {
                     OR = {
@@ -297,37 +281,43 @@ political_decisions = {
     }
 
     organize_togo = {
-        picture = map_togo
+        picture = togo_map
         potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
             civilized = yes
             NOT = {
                 has_global_flag = togo_organized
-                capital_scope = { continent = africa }
+                AND = {
+					capital_scope = { continent = africa }
+					NOT = { tag = SAF }
+				}
             }
             owns = 1914
         }
 
         allow = {
             war = no
-            machine_guns = 1
-            market_regulations = 1
+            revolution_n_counterrevolution = 1
             owns = 1914
         }
 
         effect = {
             set_global_flag = togo_organized
-            set_country_flag = togo_master
             prestige = 5
-            country_event = 199039
 
+            any_owned = {
+                limit = {
+                    OR = {
+                        region = FRA_1914
+                        region = ASH_1910
+                    }
+                }
+                add_core = TOG
+                add_province_modifier = { name = colonial_exploitation duration = 1095 }
+            }
             TOG = {
                 primary_culture = THIS
                 add_accepted_culture = ewe
-                tech_school = developing_tech_school
+                tech_school = unciv_tech_school
                 set_country_flag = post_colonial_country
                 clr_country_flag = sunni_country
                 clr_country_flag = shiite_country
@@ -346,18 +336,6 @@ political_decisions = {
                 clr_country_flag = shinto_country
                 clr_country_flag = sikh_country
                 clr_country_flag = animist_country
-            }
-
-            1914 = { add_core = TOG }
-            1917 = { add_core = TOG }
-            1918 = { add_core = TOG }
-            random_owned = {
-                limit = { province_id = 1915 }
-                add_core = TOG
-            }
-            random_owned = {
-                limit = { province_id = 1916 }
-                add_core = TOG
             }
 
             random_owned = { limit = { owner = { has_country_flag = catholic_country } } TOG = { religion = catholic set_country_flag = catholic_country } }
@@ -383,12 +361,8 @@ political_decisions = {
     }
 
     reorganize_togo = {
-        picture = map_togo
+        picture = togo_map
         potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
             civilized = yes
             has_global_flag = togo_organized
             owns = 1914
@@ -397,24 +371,26 @@ political_decisions = {
                 NOT = { is_culture_group = THIS }
             }
             NOT = {
-                has_country_flag = togo_master
-                capital_scope = { continent = africa }
+                AND = {
+					capital_scope = { continent = africa }
+					NOT = { tag = SAF }
+				}
             }
         }
 
         allow = {
             war = no
-            machine_guns = 1
-            market_regulations = 1
+            revolution_n_counterrevolution = 1
             owns = 1914
         }
 
         effect = {
             prestige = 3
-            any_country = { limit = { has_country_flag = togo_master } clr_country_flag = togo_master }
-            set_country_flag = togo_master
-            country_event = 199039
 
+            any_pop = {
+                limit = { location = { is_core = TOG } }
+                militancy = -3
+            }
             any_owned = {
                 limit = {
                     OR = {
@@ -469,57 +445,47 @@ political_decisions = {
     }
 
     organize_ivory_coast = {
-        picture = map_ivory_coast
+        picture = map_africa
         potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
             civilized = yes
             NOT = {
                 has_global_flag = ivory_coast_organized
-                capital_scope = { continent = africa }
+                AND = {
+					capital_scope = { continent = africa }
+					NOT = { tag = SAF }
+				}
             }
-            any_owned_province = {
-                OR = {
-                    region = FRA_1892
-                    region = FRA_1893
-                }
-            }
+            owns = 1892
         }
 
         allow = {
             war = no
-            machine_guns = 1
-            market_regulations = 1
-            OR = {
-                owns = 1899
-                owns = 1893
-            }
-            OR = {
-                owns = 1898
-                owns = 1894
-            }
+            revolution_n_counterrevolution = 1
+            owns = 1892
         }
 
         effect = {
             set_global_flag = ivory_coast_organized
             prestige = 5
-            set_country_flag = ivc_master
-            country_event = 199040
+
             1892 = { change_province_name = "Abidjan" }
-            FRA_1892 = { add_core = IVC }
-            FRA_1893 = { add_core = IVC }
             any_owned = {
-                limit = { is_core = IVC }
+                limit = {
+                    OR = {
+                        region = FRA_1892
+                        region = FRA_1893
+                    }
+                }
+                add_core = IVC
                 remove_core = KNG
                 remove_core = ASH
                 remove_core = MOS
+                add_province_modifier = { name = colonial_exploitation duration = 1095 }
             }
             IVC = {
                 primary_culture = THIS
                 add_accepted_culture = dyula
-                tech_school = developing_tech_school
+                tech_school = unciv_tech_school
                 set_country_flag = post_colonial_country
                 clr_country_flag = sunni_country
                 clr_country_flag = shiite_country
@@ -562,41 +528,36 @@ political_decisions = {
     }
 
     reorganize_ivory_coast = {
-        picture = map_ivory_coast
+        picture = map_africa
         potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
             civilized = yes
             has_global_flag = ivory_coast_organized
-            owns = 1899
+            owns = 1892
             IVC = {
                 exists = no
                 NOT = { is_culture_group = THIS }
             }
             NOT = {
-                has_country_flag = ivc_master
-                capital_scope = { continent = africa }
+                AND = {
+					capital_scope = { continent = africa }
+					NOT = { tag = SAF }
+				}
             }
         }
 
         allow = {
             war = no
-            machine_guns = 1
-            market_regulations = 1
-            owns = 1899
-            owns = 1893
-            owns = 1898
-            owns = 1894
+            revolution_n_counterrevolution = 1
+            owns = 1892
         }
 
         effect = {
             prestige = 3
-            any_country = { limit = { has_country_flag = ivc_master } clr_country_flag = ivc_master }
-            set_country_flag = ivc_master
-            country_event = 199040
 
+            any_pop = {
+                limit = { location = { is_core = IVC } }
+                militancy = -3
+            }
             any_owned = {
                 limit = {
                     OR = {
@@ -652,40 +613,41 @@ political_decisions = {
     }
 
     organize_sierra_leone = {
-        picture = map_sierra_leone
+        picture = map_africa
         potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
             civilized = yes
             NOT = {
                 has_global_flag = sierra_leone_organized
-                capital_scope = { continent = africa }
+                AND = {
+					capital_scope = { continent = africa }
+					NOT = { tag = SAF }
+				}
             }
-            any_owned_province = { region = FRA_1884 }
+            owns = 1884
+            owns = 1885
         }
 
         allow = {
             war = no
-            machine_guns = 1
-            market_regulations = 1
+            revolution_n_counterrevolution = 1
             owns = 1884
-            owns = 1886
         }
 
         effect = {
             set_global_flag = sierra_leone_organized
+
             prestige = 3
-            FRA_1884 = { add_core = SLE }
+            any_owned = {
+                limit = { region = FRA_1884 }
+                add_core = SLE
+                add_province_modifier = { name = colonial_exploitation duration = 1095 }
+            }
             1885 = { life_rating = 20 }
             1886 = { life_rating = 20 }
-            country_event = 199041
-            set_country_flag = sierra_leone_master
             SLE = {
                 primary_culture = THIS
                 add_accepted_culture = western_nigritic
-                tech_school = developing_tech_school
+                tech_school = unciv_tech_school
                 set_country_flag = post_colonial_country
                 clr_country_flag = sunni_country
                 clr_country_flag = shiite_country
@@ -728,12 +690,8 @@ political_decisions = {
     }
 
     reorganize_sierra_leone = {
-        picture = map_sierra_leone
+        picture = map_africa
         potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
             civilized = yes
             has_global_flag = sierra_leone_organized
             owns = 1884
@@ -742,25 +700,25 @@ political_decisions = {
                 NOT = { is_culture_group = THIS }
             }
             NOT = {
-                has_country_flag = sierra_leone_master
-                capital_scope = { continent = africa }
+                AND = {
+					capital_scope = { continent = africa }
+					NOT = { tag = SAF }
+				}
             }
         }
 
         allow = {
             war = no
-            machine_guns = 1
-            market_regulations = 1
+            revolution_n_counterrevolution = 1
             owns = 1884
-            owns = 1886
         }
 
         effect = {
             prestige = 3
-            country_event = 199041
-            any_country = { limit = { has_country_flag = sierra_leone_master } clr_country_flag = sierra_leone_master }
-            set_country_flag = sierra_leone_master
-
+            any_pop = {
+                limit = { location = { is_core = SLE } }
+                militancy = -3
+            }
             SLE = {
                 primary_culture = THIS
                 clr_country_flag = sunni_country
@@ -804,50 +762,42 @@ political_decisions = {
     }
 
     organize_guinea = {
-        picture = map_guinea
+        picture = map_africa
         potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
             civilized = yes
             NOT = {
                 has_global_flag = guinea_organized
-                capital_scope = { continent = africa }
+                AND = {
+					capital_scope = { continent = africa }
+					NOT = { tag = SAF }
+				}
             }
-            any_owned_province = { region = FRA_1883 }
+            owns = 1879
+            owns = 1880
+            owns = 1882
         }
 
         allow = {
             war = no
-            machine_guns = 1
-            market_regulations = 1
-            OR = {
-                owns = 1879
-                owns = 1880
-            }
-            OR = {
-                owns = 1880
-                owns = 1882
-            }
+            revolution_n_counterrevolution = 1
+            owns = 1879
         }
 
         effect = {
             set_global_flag = guinea_organized
             prestige = 5
-            set_country_flag = guinea_master
-            country_event = 199042
+
             1879 = { change_province_name = "Conakry" }
-            FRA_1883 = { add_core = GNE }
             any_owned = {
-                limit = { is_core = GNE }
+                limit = { region = FRA_1883 }
+                add_core = GNE
                 remove_core = JAL
-                remove_core = GBU
+                add_province_modifier = { name = colonial_exploitation duration = 1095 }
             }
             GNE = {
                 primary_culture = THIS
                 add_accepted_culture = mande
-                tech_school = developing_tech_school
+                tech_school = unciv_tech_school
                 set_country_flag = post_colonial_country
                 clr_country_flag = sunni_country
                 clr_country_flag = shiite_country
@@ -891,12 +841,8 @@ political_decisions = {
     }
 
     reorganize_guinea = {
-        picture = map_guinea
+        picture = map_africa
         potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
             civilized = yes
             has_global_flag = guinea_organized
             owns = 1879
@@ -905,31 +851,31 @@ political_decisions = {
                 NOT = { is_culture_group = THIS }
             }
             NOT = {
-                has_country_flag = guinea_master
-                capital_scope = { continent = africa }
+                AND = {
+					capital_scope = { continent = africa }
+					NOT = { tag = SAF }
+				}
             }
         }
 
         allow = {
             war = no
-            machine_guns = 1
-            market_regulations = 1
+            revolution_n_counterrevolution = 1
             owns = 1879
-            owns = 1880
-            owns = 1882
         }
 
         effect = {
             prestige = 3
-            any_country = { limit = { has_country_flag = guinea_master } clr_country_flag = guinea_master }
-            set_country_flag = guinea_master
-            country_event = 199042
+
+            any_pop = {
+                limit = { location = { is_core = GNE } }
+                militancy = -3
+            }
 
             any_owned = {
                 limit = { region = FRA_1883 }
                 add_core = GNE
                 remove_core = JAL
-                remove_core = GBU
             }
 
             GNE = {
@@ -976,77 +922,54 @@ political_decisions = {
     }
 
     organize_senegal = {
-        picture = map_senegal
+        picture = map_africa
         potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
             civilized = yes
             NOT = {
                 has_global_flag = senegal_organized
-                capital_scope = { continent = africa }
+                AND = {
+					capital_scope = { continent = africa }
+					NOT = { tag = SAF }
+				}
             }
-            any_owned_province = {
-                OR = {
-                    region = FRA_1783
-                    region = FRA_1788
-                }
-            }
+            owns = 1790
         }
 
         allow = {
             war = no
-            machine_guns = 1
-            market_regulations = 1
-            OR = {
-                owns = 1783
-                owns = 2573
-            }
-            OR = {
-                owns = 1786
-                owns = 1788
-            }
-            OR = {
-                owns = 1792
-                owns = 1793
-            }
+            revolution_n_counterrevolution = 1
+            owns = 1783
         }
 
         effect = {
             set_global_flag = senegal_organized
             prestige = 5
-            set_country_flag = senegal_master
-            country_event = 199043
-            1791 = { trade_goods = cotton }
-            1792 = { trade_goods = cotton }
-            1793 = { trade_goods = cotton }
-            1788 = { trade_goods = cotton }
-            FRA_1783 = { add_core = SNG }
-            FRA_1788 = { add_core = SNG }
             any_owned = {
-                limit = { is_core = SNG }
+                limit = {
+                    OR = {
+                        region = FRA_1783
+                        region = FRA_1788
+                    }
+                }
+                add_core = SNG
                 remove_core = TOO
                 remove_core = WOL
                 remove_core = SEG
                 remove_core = TOU
+                add_province_modifier = { name = colonial_exploitation duration = 1095 }
             }
             SNG = {
                 primary_culture = THIS
                 add_accepted_culture = wolof
-                tech_school = developing_tech_school
+                tech_school = unciv_tech_school
                 set_country_flag = post_colonial_country
             }
         }
     }
 
     reorganize_senegal = {
-        picture = map_senegal
+        picture = map_africa
         potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
             civilized = yes
             has_global_flag = senegal_organized
             owns = 1783
@@ -1055,26 +978,25 @@ political_decisions = {
                 NOT = { is_culture_group = THIS }
             }
             NOT = {
-                has_country_flag = senegal_master
-                capital_scope = { continent = africa }
+                AND = {
+					capital_scope = { continent = africa }
+					NOT = { tag = SAF }
+				}
             }
         }
 
         allow = {
             war = no
-            machine_guns = 1
-            market_regulations = 1
+            revolution_n_counterrevolution = 1
             owns = 1783
-            owns = 1786
-            owns = 1792
-            owns = 1793
         }
 
         effect = {
             prestige = 3
-            any_country = { limit = { has_country_flag = senegal_master } clr_country_flag = senegal_master }
-            set_country_flag = senegal_master
-            country_event = 199043
+            any_pop = {
+                limit = { location = { is_core = SNG } }
+                militancy = -3
+            }
 
             any_owned = {
                 limit = {
@@ -1095,71 +1017,94 @@ political_decisions = {
     }
 
     organize_niger = {
-        picture = map_niger
+        picture = map_africa
         potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
             civilized = yes
             NOT = {
                 has_global_flag = niger_organized
-                capital_scope = { continent = africa }
+                AND = {
+					capital_scope = { continent = africa }
+					NOT = { tag = SAF }
+				}
             }
-            any_owned_province = {
-                OR = {
-                    region = FRA_1813
-                    region = FRA_1808
-                }
-            }
+            owns = 1808
             1812 = { empty = no }
         }
 
         allow = {
             war = no
-            machine_guns = 1
-            market_regulations = 1
-            owns = 1812
-            OR = {
-                owns = 1808
-                owns = 1810
-            }
+            revolution_n_counterrevolution = 1
+            owns = 1808
         }
 
         effect = {
             set_global_flag = niger_organized
             prestige = 5
-            set_country_flag = niger_master
-            country_event = 199044
-
-            FRA_1813 = { add_core = NIG }
-            FRA_1808 = { add_core = NIG }
 
             any_owned = {
-                limit = { is_core = NIG }
+                limit = {
+                    OR = {
+                        region = FRA_1813
+                        region = FRA_1808
+                    }
+                }
+                add_core = NIG
                 remove_core = DND
                 remove_core = TOU
                 remove_core = MAS
                 remove_core = DAM
                 remove_core = KBO
+                add_province_modifier = { name = colonial_exploitation duration = 1095 }
             }
             NIG = {
                 primary_culture = THIS
                 add_accepted_culture = hausa
-                tech_school = developing_tech_school
+                tech_school = unciv_tech_school
                 set_country_flag = post_colonial_country
-                set_country_flag = sunni_country
+                clr_country_flag = sunni_country
+                clr_country_flag = shiite_country
+                clr_country_flag = ibadi_country
+                clr_country_flag = catholic_country
+                clr_country_flag = protestant_country
+                clr_country_flag = mormon_country
+                clr_country_flag = orthodox_country
+                clr_country_flag = coptic_country
+                clr_country_flag = jewish_country
+                clr_country_flag = yazidi_country
+                clr_country_flag = mahayana_country
+                clr_country_flag = gelugpa_country
+                clr_country_flag = theravada_country
+                clr_country_flag = hindu_country
+                clr_country_flag = shinto_country
+                clr_country_flag = sikh_country
+                clr_country_flag = animist_country
             }
+
+            random_owned = { limit = { owner = { has_country_flag = catholic_country } } NIG = { religion = catholic set_country_flag = catholic_country } }
+            random_owned = {
+                limit = { owner = { has_country_flag = protestant_country } }
+                NIG = { religion = protestant set_country_flag = protestant_country }
+            }
+            random_owned = { limit = { owner = { has_country_flag = orthodox_country } } NIG = { religion = orthodox set_country_flag = orthodox_country } }
+            random_owned = { limit = { owner = { has_country_flag = mormon_country } } NIG = { religion = mormon set_country_flag = mormon_country } }
+            random_owned = { limit = { owner = { has_country_flag = coptic_country } } NIG = { religion = coptic set_country_flag = coptic_country } }
+            random_owned = { limit = { owner = { has_country_flag = sunni_country } } NIG = { religion = sunni set_country_flag = sunni_country } }
+            random_owned = { limit = { owner = { has_country_flag = shiite_country } } NIG = { religion = shiite set_country_flag = shiite_country } }
+            random_owned = { limit = { owner = { has_country_flag = shinto_country } } NIG = { religion = shinto set_country_flag = shinto_country } }
+            random_owned = { limit = { owner = { has_country_flag = mahayana_country } } NIG = { religion = mahayana set_country_flag = mahayana_country } }
+            random_owned = { limit = { owner = { has_country_flag = gelugpa_country } } NIG = { religion = gelugpa set_country_flag = gelugpa_country } }
+            random_owned = { limit = { owner = { has_country_flag = theravada_country } } NIG = { religion = theravada set_country_flag = theravada_country } }
+            random_owned = { limit = { owner = { has_country_flag = hindu_country } } NIG = { religion = hindu set_country_flag = hindu_country } }
+            random_owned = { limit = { owner = { has_country_flag = sikh_country } } NIG = { religion = sikh set_country_flag = sikh_country } }
+            random_owned = { limit = { owner = { has_country_flag = jewish_country } } NIG = { religion = jewish set_country_flag = jewish_country } }
+            random_owned = { limit = { owner = { has_country_flag = ibadi_country } } NIG = { religion = ibadi set_country_flag = ibadi_country } }
+            random_owned = { limit = { owner = { has_country_flag = yazidi_country } } NIG = { religion =  yazidi set_country_flag = yazidi_country } }
         }
     }
 
     reorganize_niger = {
-        picture = map_niger
+        picture = map_africa
         potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
             civilized = yes
             has_global_flag = niger_organized
             owns = 1808
@@ -1168,24 +1113,26 @@ political_decisions = {
                 NOT = { is_culture_group = THIS }
             }
             NOT = {
-                has_country_flag = niger_master
-                capital_scope = { continent = africa }
+                AND = {
+					capital_scope = { continent = africa }
+					NOT = { tag = SAF }
+				}
             }
         }
 
         allow = {
             war = no
-            machine_guns = 1
-            market_regulations = 1
+            revolution_n_counterrevolution = 1
             owns = 1808
-            owns = 1812
         }
 
         effect = {
             prestige = 3
-            any_country = { limit = { has_country_flag = niger_master } clr_country_flag = niger_master }
-            set_country_flag = niger_master
-            country_event = 199044
+
+            any_pop = {
+                limit = { location = { is_core = NIG } }
+                militancy = -3
+            }
 
             any_owned = {
                 limit = {
@@ -1204,51 +1151,84 @@ political_decisions = {
 
             NIG = {
                 primary_culture = THIS
-
+                clr_country_flag = sunni_country
+                clr_country_flag = shiite_country
+                clr_country_flag = ibadi_country
+                clr_country_flag = catholic_country
+                clr_country_flag = protestant_country
+                clr_country_flag = mormon_country
+                clr_country_flag = orthodox_country
+                clr_country_flag = coptic_country
+                clr_country_flag = jewish_country
+                clr_country_flag = yazidi_country
+                clr_country_flag = mahayana_country
+                clr_country_flag = gelugpa_country
+                clr_country_flag = theravada_country
+                clr_country_flag = hindu_country
+                clr_country_flag = shinto_country
+                clr_country_flag = sikh_country
+                clr_country_flag = animist_country
             }
+
+            random_owned = { limit = { owner = { has_country_flag = catholic_country } } NIG = { religion = catholic set_country_flag = catholic_country } }
+            random_owned = {
+                limit = { owner = { has_country_flag = protestant_country } }
+                NIG = { religion = protestant set_country_flag = protestant_country }
+            }
+            random_owned = { limit = { owner = { has_country_flag = orthodox_country } } NIG = { religion = orthodox set_country_flag = orthodox_country } }
+            random_owned = { limit = { owner = { has_country_flag = mormon_country } } NIG = { religion = mormon set_country_flag = mormon_country } }
+            random_owned = { limit = { owner = { has_country_flag = coptic_country } } NIG = { religion = coptic set_country_flag = coptic_country } }
+            random_owned = { limit = { owner = { has_country_flag = sunni_country } } NIG = { religion = sunni set_country_flag = sunni_country } }
+            random_owned = { limit = { owner = { has_country_flag = shiite_country } } NIG = { religion = shiite set_country_flag = shiite_country } }
+            random_owned = { limit = { owner = { has_country_flag = shinto_country } } NIG = { religion = shinto set_country_flag = shinto_country } }
+            random_owned = { limit = { owner = { has_country_flag = mahayana_country } } NIG = { religion = mahayana set_country_flag = mahayana_country } }
+            random_owned = { limit = { owner = { has_country_flag = gelugpa_country } } NIG = { religion = gelugpa set_country_flag = gelugpa_country } }
+            random_owned = { limit = { owner = { has_country_flag = theravada_country } } NIG = { religion = theravada set_country_flag = theravada_country } }
+            random_owned = { limit = { owner = { has_country_flag = hindu_country } } NIG = { religion = hindu set_country_flag = hindu_country } }
+            random_owned = { limit = { owner = { has_country_flag = sikh_country } } NIG = { religion = sikh set_country_flag = sikh_country } }
+            random_owned = { limit = { owner = { has_country_flag = jewish_country } } NIG = { religion = jewish set_country_flag = jewish_country } }
+            random_owned = { limit = { owner = { has_country_flag = ibadi_country } } NIG = { religion = ibadi set_country_flag = ibadi_country } }
+            random_owned = { limit = { owner = { has_country_flag = yazidi_country } } NIG = { religion =  yazidi set_country_flag = yazidi_country } }
         }
     }
 
     organize_chad = {
-        picture = map_chad
+        picture = map_africa
         potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
             civilized = yes
             NOT = {
                 has_global_flag = chad_organized
-                capital_scope = { continent = africa }
+                AND = {
+					capital_scope = { continent = africa }
+					NOT = { tag = SAF }
+				}
             }
-            any_owned_province = {
-                OR = {
-                    region = ENG_1818
-                    region = ENG_1825
-                }
-            }
+            owns = 1818
         }
 
         allow = {
             war = no
-            machine_guns = 1
-            market_regulations = 1
+            revolution_n_counterrevolution = 1
             owns = 1818
-            owns = 1821
         }
 
         effect = {
             set_global_flag = chad_organized
             prestige = 5
-            set_country_flag = chad_master
-            country_event = 199045
 
-            1818 = { change_province_name = "N'Djamena" }
-
-            ENG_1818 = { add_core = CHD }
-            ENG_1825 = { add_core = CHD }
-
-
+            1818 = {
+                change_province_name = "N'Djamena"
+            }
+            any_owned = {
+                limit = {
+                    OR = {
+                        region = ENG_1818
+                        region = ENG_1825
+                    }
+                }
+                add_core = CHD
+                add_province_modifier = { name = colonial_exploitation duration = 1095 }
+            }
             any_owned = {
                 limit = {
                     OR = {
@@ -1256,14 +1236,13 @@ political_decisions = {
                         region = ENG_1825
                     }
                     NOT = { terrain = desert }
-                    NOT = { life_rating = 12 }
                 }
                 life_rating = 25
             }
             CHD = {
                 primary_culture = THIS
                 add_accepted_culture = sara
-                tech_school = developing_tech_school
+                tech_school = unciv_tech_school
                 set_country_flag = post_colonial_country
                 clr_country_flag = sunni_country
                 clr_country_flag = shiite_country
@@ -1306,12 +1285,8 @@ political_decisions = {
     }
 
     reorganize_chad = {
-        picture = map_chad
+        picture = map_africa
         potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
             civilized = yes
             has_global_flag = chad_organized
             owns = 1818
@@ -1320,25 +1295,26 @@ political_decisions = {
                 NOT = { is_culture_group = THIS }
             }
             NOT = {
-                has_country_flag = chad_master
-                capital_scope = { continent = africa }
+                AND = {
+					capital_scope = { continent = africa }
+					NOT = { tag = SAF }
+				}
             }
         }
 
         allow = {
-        war = no
-            machine_guns = 1
-            market_regulations = 1
+            war = no
+            revolution_n_counterrevolution = 1
             owns = 1818
-            owns = 1821
         }
 
         effect = {
             prestige = 3
-            any_country = { limit = { has_country_flag = chad_master } clr_country_flag = chad_master }
-            set_country_flag = chad_master
-            country_event = 199045
 
+            any_pop = {
+                limit = { location = { is_core = CHD } }
+                militancy = -3
+            }
             any_owned = {
                 limit = {
                     OR = {
@@ -1402,53 +1378,43 @@ political_decisions = {
     }
 
     organize_cameroon = {
-        picture = map_cameroon
+        picture = map_africa
         potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
             civilized = yes
             NOT = {
                 has_global_flag = cameroon_organized
-                capital_scope = { continent = africa }
+                AND = {
+					capital_scope = { continent = africa }
+					NOT = { tag = SAF }
+				}
             }
-            any_owned_province = {
-                OR = {
-                    region = ENG_1956
-                    region = SOK_1963
-                }
-            }
+            owns = 1959
         }
 
         allow = {
             war = no
-            machine_guns = 1
-            market_regulations = 1
-            OR = {
-                owns = 1959
-                owns = 1961
-            }
+            revolution_n_counterrevolution = 1
+            owns = 1959
         }
 
         effect = {
             set_global_flag = cameroon_organized
             prestige = 5
-            set_country_flag = cameroon_master
-            country_event = 199046
 
-            ENG_1956 = {
+            any_owned = {
+                limit = {
+                    OR = {
+                        region = ENG_1956
+                        region = SOK_1963
+                    }
+                }
                 add_core = CMR
                 life_rating = 25
+                add_province_modifier = { name = colonial_exploitation duration = 1095 }
             }
-            SOK_1963 = {
-                add_core = CMR
-                life_rating = 25
-            }
-
             CMR = {
                 primary_culture = THIS
-                tech_school = developing_tech_school
+                tech_school = unciv_tech_school
                 add_accepted_culture = forest_bantu
                 set_country_flag = post_colonial_country
                 clr_country_flag = sunni_country
@@ -1493,12 +1459,8 @@ political_decisions = {
     }
 
     reorganize_cameroon = {
-        picture = map_cameroon
+        picture = map_africa
         potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
             civilized = yes
             has_global_flag = cameroon_organized
             owns = 1959
@@ -1507,25 +1469,26 @@ political_decisions = {
                 NOT = { is_culture_group = THIS }
             }
             NOT = {
-                has_country_flag = cameroon_master
-                capital_scope = { continent = africa }
+                AND = {
+					capital_scope = { continent = africa }
+					NOT = { tag = SAF }
+				}
             }
         }
 
         allow = {
             war = no
-            machine_guns = 1
-            market_regulations = 1
+            revolution_n_counterrevolution = 1
             owns = 1959
-            owns = 1961
         }
 
         effect = {
             prestige = 3
-            any_country = { limit = { has_country_flag = cameroon_master } clr_country_flag = cameroon_master }
-            set_country_flag = cameroon_master
-            country_event = 199046
 
+            any_pop = {
+                limit = { location = { is_core = CMR } }
+                militancy = -3
+            }
             any_owned = {
                 limit = {
                     OR = {
@@ -1589,70 +1552,39 @@ political_decisions = {
     }
 
     organize_gabon = {
-        picture = map_gabon
+        picture = map_africa
         potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
             civilized = yes
             NOT = {
                 has_global_flag = gabon_organized
-                capital_scope = { continent = africa }
+                AND = {
+					capital_scope = { continent = africa }
+					NOT = { tag = SAF }
+				}
             }
-            any_owned_province = { region = FRA_1972 }
+            owns = 1972
         }
 
         allow = {
             war = no
-            machine_guns = 1
-            market_regulations = 1
-            OR = {
-                owns = 1972
-                owns = 1975
-            }
+            revolution_n_counterrevolution = 1
+            owns = 1972
         }
 
         effect = {
             set_global_flag = gabon_organized
             prestige = 5
-            set_country_flag = gabon_master
-            country_event = 199047
 
-            FRA_1972 = { add_core = GAB }
             any_owned = {
-                limit = {
-                    OR = {
-                        province_id = 1975
-                        province_id = 1976
-                    }
-                    NOT = { life_rating = 12 }
-                }
+                limit = { region = FRA_1972 }
+                add_core = GAB
                 life_rating = 25
+                add_province_modifier = { name = colonial_exploitation duration = 1095 }
             }
-
-            any_owned = {
-                limit = {
-                    OR = {
-                        province_id = 1975
-                        province_id = 1976
-                    }
-                }
-                any_pop = {
-                    limit = {
-                        OR = {
-                            has_pop_culture = forest_bantu
-                            has_pop_culture = fang
-                        }
-                    }
-                    literacy = -0.99
-                }
-            }
-
             GAB = {
                 primary_culture = THIS
                 add_accepted_culture = fang
-                tech_school = developing_tech_school
+                tech_school = unciv_tech_school
                 set_country_flag = post_colonial_country
                 clr_country_flag = sunni_country
                 clr_country_flag = shiite_country
@@ -1671,7 +1603,6 @@ political_decisions = {
                 clr_country_flag = shinto_country
                 clr_country_flag = sikh_country
                 clr_country_flag = animist_country
-                all_core = { remove_core = EQG }
             }
 
             random_owned = { limit = { owner = { has_country_flag = catholic_country } } GAB = { religion = catholic set_country_flag = catholic_country } }
@@ -1697,12 +1628,8 @@ political_decisions = {
     }
 
     reorganize_gabon = {
-        picture = map_gabon
+        picture = map_africa
         potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
             civilized = yes
             has_global_flag = gabon_organized
             owns = 1972
@@ -1711,24 +1638,26 @@ political_decisions = {
                 NOT = { is_culture_group = THIS }
             }
             NOT = {
-                has_country_flag = gabon_master
-                capital_scope = { continent = africa }
+                AND = {
+					capital_scope = { continent = africa }
+					NOT = { tag = SAF }
+				}
             }
         }
 
         allow = {
             war = no
-            machine_guns = 1
-            market_regulations = 1
+            revolution_n_counterrevolution = 1
             owns = 1972
         }
 
         effect = {
             prestige = 3
-            any_country = { limit = { has_country_flag = gabon_master } clr_country_flag = gabon_master }
-            set_country_flag = gabon_master
-            country_event = 199047
 
+            any_pop = {
+                limit = { location = { is_core = GAB } }
+                militancy = -3
+            }
             GAB = {
                 primary_culture = THIS
                 clr_country_flag = sunni_country
@@ -1773,61 +1702,42 @@ political_decisions = {
     }
 
     organize_congo = {
-        picture = map_congo
+        picture = map_africa
         potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
             civilized = yes
             NOT = {
                 has_global_flag = congo_organized
-                capital_scope = { continent = africa }
+                AND = {
+					capital_scope = { continent = africa }
+					NOT = { tag = SAF }
+				}
             }
-            any_owned_province = { region = FRA_1978 }
+            owns = 1977
         }
 
         allow = {
             war = no
-            machine_guns = 1
-            market_regulations = 1
+            revolution_n_counterrevolution = 1
             owns = 1977
         }
 
         effect = {
             set_global_flag = congo_organized
             prestige = 5
-            set_country_flag = congo_master
-            country_event = 199048
 
             1977 = {
                 change_province_name = "Brazzaville"
-                add_core = CGO
             }
-
-            1978 = {
-                life_rating = 4
+            any_owned = {
+                limit = { region = FRA_1978 }
                 add_core = CGO
+                life_rating = 25
+                add_province_modifier = { name = colonial_exploitation duration = 1095 }
             }
-
-            1980 = {
-                add_core = CGO
-            }
-
-            1981 = {
-                add_core = CGO
-            }
-
-            2624 = {
-                add_core = CGO
-            }
-
-            any_owned = { limit = { is_core = CGO NOT = {life_rating = 12 } } life_rating = 25 }
-
             any_owned = { limit = { is_core = CGO } remove_core = LOA }
             CGO = {
                 primary_culture = THIS
-                tech_school = developing_tech_school
+                tech_school = unciv_tech_school
                 set_country_flag = post_colonial_country
                 add_accepted_culture = bakongo
                 clr_country_flag = sunni_country
@@ -1872,12 +1782,8 @@ political_decisions = {
     }
 
     reorganize_congo = {
-        picture = map_congo
+        picture = map_africa
         potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
             civilized = yes
             has_global_flag = congo_organized
             owns = 1977
@@ -1886,25 +1792,26 @@ political_decisions = {
                 NOT = { is_culture_group = THIS }
             }
             NOT = {
-                has_country_flag = congo_master
-                capital_scope = { continent = africa }
+                AND = {
+					capital_scope = { continent = africa }
+					NOT = { tag = SAF }
+				}
             }
         }
 
         allow = {
             war = no
-            machine_guns = 1
-            market_regulations = 1
+            revolution_n_counterrevolution = 1
             owns = 1977
         }
 
         effect = {
             prestige = 3
 
-            any_country = { limit = { has_country_flag = congo_master } clr_country_flag = congo_master }
-            set_country_flag = congo_master
-            country_event = 199048
-
+            any_pop = {
+                limit = { location = { is_core = CGO } }
+                militancy = -3
+            }
             any_owned = {
                 limit = { region = FRA_1978 }
                 add_core = CGO
@@ -1960,85 +1867,62 @@ political_decisions = {
         }
     }
 
-    organize_zaire     = {
-        picture = map_congo_free_state
+    organize_zaire = {
+        picture = map_africa
         potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
             civilized = yes
             NOT = {
                 has_global_flag = zaire_organized
-                capital_scope = { continent = africa }
+                AND = {
+					capital_scope = { continent = africa }
+					NOT = { tag = SAF }
+				}
             }
+            owns = 1982
             NOT = { has_country_flag = not_congo_primary_culture }
-            any_owned_province = {
-                OR = {
-                    province_id = 1982
-                    province_id = 1983
-                    province_id = 1985
-                    region = BEL_1984
-                    region = BEL_1990
-                    region = BEL_1987
-                }
-            }
+            year = 1900
         }
 
         allow = {
             war = no
-            machine_guns = 1
-            market_regulations = 1
-            OR = {
-                1985 = { owned_by = THIS }
-                BEL_1984 = { owned_by = THIS }
-            }
-            OR = {
-                1982 = { owned_by = THIS }
-                BEL_1984 = { owned_by = THIS }
-            }
-            OR = {
-                BEL_1990 = { owned_by = THIS }
-                BEL_1987 = { owned_by = THIS }
-            }
+            revolution_n_counterrevolution = 1
+            owns = 1982
         }
 
         effect = {
             set_global_flag = zaire_organized
             prestige = 5
-            set_country_flag = zaire_master
-            country_event = 199049
-
             any_country = { clr_country_flag = not_congo_primary_culture }
-            1982 = { add_core = CNG }
-            1983 = { add_core = CNG }
-            1985 = { add_core = CNG }
-            BEL_1984 = { add_core = CNG }
-            BEL_1987 = { add_core = CNG }
-            BEL_1990 = { add_core = CNG }
+
             any_owned = {
                 limit = {
                     OR = {
                         region = BEL_1977
                         region = BEL_1984
+                        region = BEL_1992
                         region = BEL_1987
                         region = BEL_1990
+                        region = BEL_1996
                     }
                 }
+                add_core = CNG
                 remove_core = CGO
                 remove_core = LUA
                 remove_core = LOA
                 remove_core = AZA
                 remove_core = KZB
                 remove_core = KON
+                add_province_modifier = { name = colonial_exploitation duration = 1095 }
             }
             any_owned = {
                 limit = {
                     OR = {
                         region = BEL_1977
                         region = BEL_1984
+                        region = BEL_1992
                         region = BEL_1987
                         region = BEL_1990
+                        region = BEL_1996
                     }
                     NOT = { life_rating = 12 }
                 }
@@ -2046,7 +1930,7 @@ political_decisions = {
             }
             CNG = {
                 primary_culture = THIS
-                tech_school = developing_tech_school
+                tech_school = unciv_tech_school
                 set_country_flag = post_colonial_country
                 clr_country_flag = sunni_country
                 clr_country_flag = shiite_country
@@ -2090,12 +1974,8 @@ political_decisions = {
     }
 
     reorganize_zaire = {
-        picture = map_congo_free_state
+        picture = map_africa
         potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
             civilized = yes
             has_global_flag = zaire_organized
             owns = 1982
@@ -2103,40 +1983,35 @@ political_decisions = {
                 exists = no
                 NOT = { is_culture_group = THIS }
             }
-            NOT = {
-                has_country_flag = zaire_master
-                capital_scope = { continent = africa }
-            }
+            NOT = { AND = {
+					capital_scope = { continent = africa }
+					NOT = { tag = SAF }
+				} }
             NOT = { has_country_flag = not_congo_primary_culture }
-            year = 1900
         }
 
         allow = {
             war = no
-            machine_guns = 1
-            market_regulations = 1
+            revolution_n_counterrevolution = 1
             owns = 1982
-            owns = 1993
-            owns = 1996
-            owns = 1987
         }
 
         effect = {
-            prestige = 3
-
-            any_country = { limit = { has_country_flag = zaire_master } clr_country_flag = zaire_master }
-            set_country_flag = zaire_master
-            country_event = 199049
-
             any_country = { clr_country_flag = not_congo_primary_culture }
-
+            prestige = 3
+            any_pop = {
+                limit = { location = { is_core = CNG } }
+                militancy = -3
+            }
             any_owned = {
                 limit = {
                     OR = {
                         region = BEL_1977
                         region = BEL_1984
+                        region = BEL_1992
                         region = BEL_1987
                         region = BEL_1990
+                        region = BEL_1996
                     }
                 }
                 add_core = CNG
@@ -2152,8 +2027,10 @@ political_decisions = {
                     OR = {
                         region = BEL_1977
                         region = BEL_1984
+                        region = BEL_1992
                         region = BEL_1987
                         region = BEL_1990
+                        region = BEL_1996
                     }
                     NOT = { life_rating = 12 }
                 }
@@ -2203,53 +2080,41 @@ political_decisions = {
     }
 
     organize_zambia = {
-        picture = map_zambia
+        picture = map_africa
         potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
             civilized = yes
             NOT = {
                 has_global_flag = zambia_organized
-                capital_scope = { continent = africa }
+                AND = {
+					capital_scope = { continent = africa }
+					NOT = { tag = SAF }
+				}
             }
-            any_owned_province = {
-                OR = {
-                    region = ENG_2014
-                    region = ENG_2016
-                }
-            }
+            owns = 2012
         }
 
         allow = {
             war = no
-            machine_guns = 1
-            market_regulations = 1
-            OR = {
-                ENG_2014 = { owned_by = THIS }
-                ENG_2016 = { owned_by = THIS }
-            }
+            revolution_n_counterrevolution = 1
+            owns = 2012
         }
 
         effect = {
             set_global_flag = zambia_organized
+
             prestige = 5
-            set_country_flag = zambia_master
-            country_event = 199050
-
-            random_owned = {
-                limit = { province_id = 2017 }
-                change_province_name = "Kasama"
-            }
-
-            ENG_2014 = { add_core = ZAM }
-            ENG_2016 = { add_core = ZAM }
-
+            random_owned = { limit = { owner = { owns = 2017 } } 2017 = { change_province_name = "Kasama" } }
             any_owned = {
-                limit = { is_core = ZAM }
+                limit = {
+                    OR = {
+                        region = ENG_2014
+                        region = ENG_2016
+                    }
+                }
+                add_core = ZAM
                 remove_core = KZB
                 remove_core = LUA
+                add_province_modifier = { name = colonial_exploitation duration = 1095 }
             }
             any_owned = {
                 limit = {
@@ -2264,12 +2129,9 @@ political_decisions = {
             ZAM = {
                 primary_culture = THIS
                 add_accepted_culture = lunda
-                tech_school = developing_tech_school
+                tech_school = unciv_tech_school
                 set_country_flag = post_colonial_country
-                all_core = {
-                    remove_core = LUN
-                    remove_core = KZB
-                }
+                all_core = { remove_core = LUN remove_core = KZB }
                 clr_country_flag = sunni_country
                 clr_country_flag = shiite_country
                 clr_country_flag = ibadi_country
@@ -2312,12 +2174,8 @@ political_decisions = {
     }
 
     reorganize_zambia = {
-        picture = map_zambia
+        picture = map_africa
         potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
             civilized = yes
             has_global_flag = zambia_organized
             owns = 2012
@@ -2326,29 +2184,25 @@ political_decisions = {
                 NOT = { is_culture_group = THIS }
             }
             NOT = {
-                has_country_flag = zambia_master
-                capital_scope = { continent = africa }
+                AND = {
+					capital_scope = { continent = africa }
+					NOT = { tag = SAF }
+				}
             }
         }
 
         allow = {
             war = no
-            machine_guns = 1
-            market_regulations = 1
+            revolution_n_counterrevolution = 1
             owns = 2012
-            owns = 2016
         }
 
         effect = {
             prestige = 3
-
-            any_country = {
-                limit = { has_country_flag = zambia_master }
-                clr_country_flag = zambia_master
+            any_pop = {
+                limit = { location = { is_core = ZAM } }
+                militancy = -3
             }
-            set_country_flag = zambia_master
-            country_event = 199050
-
             any_owned = {
                 limit = {
                     OR = {
@@ -2414,44 +2268,40 @@ political_decisions = {
     }
 
     organize_kenya = {
-        picture = map_kenya
+        picture = map_africa
         potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
             civilized = yes
             NOT = {
                 has_global_flag = kenya_organized
-                capital_scope = { continent = africa }
+                AND = {
+					capital_scope = { continent = africa }
+					NOT = { tag = SAF }
+				}
             }
-            any_owned_province = {
-                OR = {
-                    region = ENG_2026
-                    region = ENG_2024
-                }
-            }
+            owns = 2024
         }
 
         allow = {
             war = no
-            machine_guns = 1
-            market_regulations = 1
-            OR = {
-                ENG_2026 = { owned_by = THIS }
-                ENG_2024 = { owned_by = THIS }
-            }
+            revolution_n_counterrevolution = 1
+            owns = 2024
         }
 
         effect = {
             set_global_flag = kenya_organized
+
             prestige = 5
-            set_country_flag = kenya_master
-            country_event = 199051
-
-            ENG_2026 = { add_core = KNY }
-            ENG_2024 = { add_core = KNY }
-
+            any_owned = {
+                limit = {
+                    OR = {
+                        region = ENG_2026
+                        region = ENG_2024
+                    }
+                }
+                add_core = KNY
+                remove_core = ZAN
+                add_province_modifier = { name = colonial_exploitation duration = 1095 }
+            }
             any_owned = {
                 limit = {
                     OR = {
@@ -2465,7 +2315,7 @@ political_decisions = {
             KNY = {
                 primary_culture = THIS
                 add_accepted_culture = kikuyu
-                tech_school = developing_tech_school
+                tech_school = unciv_tech_school
                 set_country_flag = post_colonial_country
                 clr_country_flag = sunni_country
                 clr_country_flag = shiite_country
@@ -2484,8 +2334,10 @@ political_decisions = {
                 clr_country_flag = shinto_country
                 clr_country_flag = sikh_country
                 clr_country_flag = animist_country
-                all_core = { remove_core = ZAN }
             }
+            2026 = { trade_goods = tea }
+            2027 = { trade_goods = tea }
+            2028 = { trade_goods = tea }
 
             random_owned = { limit = { owner = { has_country_flag = catholic_country } } KNY = { religion = catholic set_country_flag = catholic_country } }
             random_owned = {
@@ -2510,12 +2362,8 @@ political_decisions = {
     }
 
     reorganize_kenya = {
-        picture = map_kenya
+        picture = map_africa
         potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
             civilized = yes
             has_global_flag = kenya_organized
             owns = 2024
@@ -2524,30 +2372,26 @@ political_decisions = {
                 NOT = { is_culture_group = THIS }
             }
             NOT = {
-                has_country_flag = kenya_master
-                capital_scope = { continent = africa }
+                AND = {
+					capital_scope = { continent = africa }
+					NOT = { tag = SAF }
+				}
             }
         }
 
         allow = {
             war = no
-            machine_guns = 1
-            market_regulations = 1
+            revolution_n_counterrevolution = 1
             owns = 2024
-            owns = 2030
-            owns = 2028
         }
 
         effect = {
-            any_country = {
-                limit = { has_country_flag = kenya_master }
-                clr_country_flag = kenya_master
-            }
-            set_country_flag = kenya_master
-            country_event = 199051
-
             prestige = 3
 
+            any_pop = {
+                limit = { location = { is_core = KNY } }
+                militancy = -3
+            }
             any_owned = {
                 limit = {
                     OR = {
@@ -2612,50 +2456,39 @@ political_decisions = {
     }
 
     organize_tanzania = {
-        picture = map_tanzania
+        picture = map_africa
         potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
             civilized = yes
             NOT = {
                 has_global_flag = tanzania_organized
-                capital_scope = { continent = africa }
+                AND = {
+					capital_scope = { continent = africa }
+					NOT = { tag = SAF }
+				}
             }
-            any_owned_province = {
-                OR = {
-                    region = ENG_2036
-                    region = ENG_2044
-                    region = ENG_2039
-                }
-            }
+            owns = 2044
         }
 
         allow = {
             war = no
-            machine_guns = 1
-            market_regulations = 1
-            OR = {
-                ENG_2036 = { owned_by = THIS }
-                ENG_2044 = { owned_by = THIS }
-            }
-            OR = {
-                ENG_2036 = { owned_by = THIS }
-                ENG_2039 = { owned_by = THIS }
-            }
+            revolution_n_counterrevolution = 1
+            owns = 2044
         }
 
         effect = {
             set_global_flag = tanzania_organized
             prestige = 5
-            set_country_flag = tanzania_master
-            country_event = 199052
-
-            ENG_2036 = { add_core = TNZ }
-            ENG_2044 = { add_core = TNZ }
-            ENG_2039 = { add_core = TNZ }
-
+            any_owned = {
+                limit = {
+                    OR = {
+                        region = ENG_2036
+                        region = ENG_2044
+                        region = ENG_2039
+                    }
+                }
+                add_core = TNZ
+                add_province_modifier = { name = colonial_exploitation duration = 1095 }
+            }
             any_owned = {
                 limit = {
                     OR = {
@@ -2667,12 +2500,12 @@ political_decisions = {
                 }
                 life_rating = 25
             }
-            2043 = { change_province_name = "Tabora" }
+            1850 = { change_province_name = "Tabora" }
             2045 = { change_province_name = "Dodoma" }
             TNZ = {
                 primary_culture = THIS
                 add_accepted_culture = swahili
-                tech_school = developing_tech_school
+                tech_school = unciv_tech_school
                 set_country_flag = post_colonial_country
                 clr_country_flag = sunni_country
                 clr_country_flag = shiite_country
@@ -2691,7 +2524,6 @@ political_decisions = {
                 clr_country_flag = shinto_country
                 clr_country_flag = sikh_country
                 clr_country_flag = animist_country
-                all_core = { remove_core = ZAN }
             }
 
             random_owned = { limit = { owner = { has_country_flag = catholic_country } } TNZ = { religion = catholic set_country_flag = catholic_country } }
@@ -2717,12 +2549,8 @@ political_decisions = {
     }
 
     reorganize_tanzania = {
-        picture = map_tanzania
+        picture = map_africa
         potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
             civilized = yes
             has_global_flag = tanzania_organized
             owns = 2044
@@ -2731,31 +2559,25 @@ political_decisions = {
                 NOT = { is_culture_group = THIS }
             }
             NOT = {
-                has_country_flag = tanzania_master
-                capital_scope = { continent = africa }
+                AND = {
+					capital_scope = { continent = africa }
+					NOT = { tag = SAF }
+				}
             }
         }
 
         allow = {
             war = no
-            machine_guns = 1
-            market_regulations = 1
+            revolution_n_counterrevolution = 1
             owns = 2044
-            owns = 2045
-            owns = 2041
-            owns = 2036
-            owns = 2038
         }
 
         effect = {
-            any_country = {
-                limit = { has_country_flag = tanzania_master }
-                clr_country_flag = tanzania_master
-            }
-            set_country_flag = tanzania_master
-            country_event = 199052
             prestige = 3
-
+            any_pop = {
+                limit = { location = { is_core = TNZ } }
+                militancy = -3
+            }
             any_owned = {
                 limit = {
                     OR = {
@@ -2821,68 +2643,50 @@ political_decisions = {
     }
 
     organize_mali = {
-        picture = map_mali
+        picture = map_africa
         potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
             civilized = yes
             NOT = {
                 has_global_flag = mali_organized
-                capital_scope = { continent = africa }
+                AND = {
+					capital_scope = { continent = africa }
+					NOT = { tag = SAF }
+				}
             }
             2609 = { empty = no }
-            any_owned_province = {
-                OR = {
-                    region = FRA_1803
-                    region = FRA_1801
-                    region = FRA_1798
-                }
-            }
+            owns = 1803
         }
 
         allow = {
             war = no
-            machine_guns = 1
-            market_regulations = 1
-            OR = {
-                FRA_1803 = { owned_by = THIS }
-                FRA_1798 = { owned_by = THIS }
-            }
-            OR = {
-                FRA_1801 = { owned_by = THIS }
-                FRA_1798 = { owned_by = THIS }
-            }
+            revolution_n_counterrevolution = 1
+            owns = 1803
         }
 
         effect = {
-
             set_global_flag = mali_organized
-            prestige = 5
-            set_country_flag = mali_master
-            country_event = 199053
-
-            FRA_1803 = { add_core = MLI }
-            FRA_1801 = { add_core = MLI }
-            FRA_1798 = { add_core = MLI }
-
+            prestige = 3
             any_owned = {
-                limit = { is_core = MLI }
+                limit = {
+                    OR = {
+                        region = FRA_1803
+                        region = FRA_1801
+                        region = FRA_1798
+                    }
+                }
+                add_core = MLI
                 remove_core = TOU
                 remove_core = SEG
                 remove_core = MAS
                 remove_core = MOS
                 remove_core = DND
                 remove_core = BKF
+                add_province_modifier = { name = colonial_exploitation duration = 1095 }
             }
-
             MLI = {
                 primary_culture = THIS
                 add_accepted_culture = fulbe
-                government = democracy
-                political_reform = landed_voting
-                tech_school = developing_tech_school
+                tech_school = unciv_tech_school
                 set_country_flag = post_colonial_country
                 clr_country_flag = sunni_country
                 clr_country_flag = shiite_country
@@ -2925,43 +2729,35 @@ political_decisions = {
     }
 
     reorganize_mali = {
-        picture = map_mali
+        picture = map_africa
         potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
             civilized = yes
             has_global_flag = mali_organized
-            owns = 1803
+            owns = 2609
             MLI = {
                 exists = no
                 NOT = { is_culture_group = THIS }
             }
             NOT = {
-                has_country_flag = mali_master
-                capital_scope = { continent = africa }
+                AND = {
+					capital_scope = { continent = africa }
+					NOT = { tag = SAF }
+				}
             }
         }
 
         allow = {
             war = no
-            machine_guns = 1
-            market_regulations = 1
-            owns = 1803
-            owns = 1797
-            owns = 1794
+            revolution_n_counterrevolution = 1
+            owns = 2609
         }
 
         effect = {
-            any_country = {
-                limit = { has_country_flag = mali_master }
-                clr_country_flag = mali_master
-            }
-            set_country_flag = mali_master
-            country_event = 199053
-
             prestige = 3
+            any_pop = {
+                limit = { location = { is_core = MLI } }
+                militancy = -3
+            }
 
             any_owned = {
                 limit = {
@@ -3023,33 +2819,30 @@ political_decisions = {
     }
 
     organize_libya = {
-        picture = map_libya
+        picture = map_africa
         potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
             civilized = yes
             NOT = {
                 tag = TUR
                 has_global_flag = libya_organized
-                capital_scope = { continent = africa }
+                AND = {
+					capital_scope = { continent = africa }
+					NOT = { tag = SAF }
+				}
             }
             owns = 1731
         }
 
         allow = {
             war = no
-            machine_guns = 1
-            market_regulations = 1
+            revolution_n_counterrevolution = 1
             owns = 1731
-            owns = 1735
         }
 
         effect = {
             set_global_flag = libya_organized
-            prestige = 5
 
+            prestige = 3
             any_owned = {
                 limit = {
                     OR = {
@@ -3060,13 +2853,14 @@ political_decisions = {
                 add_core = LBY
                 remove_core = TRI
                 remove_core = CYR
+                add_province_modifier = { name = colonial_exploitation duration = 1095 }
             }
-            LBY = { tech_school = developing_tech_school }
+            LBY = { tech_school = unciv_tech_school }
         }
     }
 
     organize_libya_TUR = {
-        picture = map_libya
+        picture = map_africa
         potential = {
             tag = TUR
             nationalism_n_imperialism = 1
@@ -3098,45 +2892,41 @@ political_decisions = {
                 add_core = LBY
                 remove_core = TRI
                 remove_core = CYR
+                add_province_modifier = { name = colonial_exploitation duration = 1095 }
             }
-            LBY = { tech_school = developing_tech_school }
+            LBY = { tech_school = unciv_tech_school }
         }
     }
 
     organize_CAR = {
-        picture = map_CAR
+        picture = map_africa
         potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
             civilized = yes
             NOT = {
                 has_global_flag = CAR_organized
-                capital_scope = { continent = africa }
+                AND = {
+					capital_scope = { continent = africa }
+					NOT = { tag = SAF }
+				}
             }
             owns = 1965
         }
 
         allow = {
             war = no
-            machine_guns = 1
-            market_regulations = 1
+            revolution_n_counterrevolution = 1
             owns = 1965
         }
 
         effect = {
-
             set_global_flag = CAR_organized
-            prestige = 5
-            set_country_flag = CAR_master
-            country_event = 199054
-
+            prestige = 3
             any_owned = {
                 limit = { region = FRA_1965 }
                 add_core = CAR
                 remove_core = AZA
                 #remove_core = DAR
+                add_province_modifier = { name = colonial_exploitation duration = 1095 }
             }
             any_owned = {
                 limit = {
@@ -3148,7 +2938,7 @@ political_decisions = {
             CAR = {
                 primary_culture = THIS
                 add_accepted_culture = ubangian
-                tech_school = developing_tech_school
+                tech_school = unciv_tech_school
                 set_country_flag = post_colonial_country
                 clr_country_flag = sunni_country
                 clr_country_flag = shiite_country
@@ -3192,12 +2982,8 @@ political_decisions = {
     }
 
     reorganize_CAR = {
-        picture = map_CAR
+        picture = map_africa
         potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
             civilized = yes
             has_global_flag = CAR_organized
             owns = 1965
@@ -3205,28 +2991,24 @@ political_decisions = {
                 exists = no
                 NOT = { is_culture_group = THIS }
             }
-            NOT = {
-                has_country_flag = CAR_master
-                capital_scope = { continent = africa }
-            }
+            NOT = { AND = {
+					capital_scope = { continent = africa }
+					NOT = { tag = SAF }
+				} }
         }
 
         allow = {
             war = no
-            machine_guns = 1
-            market_regulations = 1
+            revolution_n_counterrevolution = 1
             owns = 1965
         }
 
         effect = {
-            any_country = {
-                limit = { has_country_flag = CAR_master }
-                clr_country_flag = CAR_master
-            }
-            set_country_flag = CAR_master
-            country_event = 199054
             prestige = 3
-
+            any_pop = {
+                limit = { location = { is_core = CAR } }
+                militancy = -3
+            }
             any_owned = {
                 limit = {
                     region = FRA_1965
@@ -3286,49 +3068,47 @@ political_decisions = {
     }
 
     organize_malawi = {
-        picture = map_malawi
+        picture = map_africa
         potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
             civilized = yes
             NOT = {
                 has_global_flag = malawi_organized
-                capital_scope = { continent = africa }
+                AND = {
+					capital_scope = { continent = africa }
+					NOT = { tag = SAF }
+				}
             }
             owns = 2067
         }
 
         allow = {
             war = no
-            machine_guns = 1
-            market_regulations = 1
+            revolution_n_counterrevolution = 1
             owns = 2067
+            owns = 2066
         }
 
         effect = {
-
             set_global_flag = malawi_organized
-            prestige = 5
-            set_country_flag = malawi_master
-            country_event = 199055
+            prestige = 3
 
             2067 = {
                 add_core = MLW
                 remove_core = KZB
+                trade_goods = tea
                 life_rating = 25
+                add_province_modifier = { name = colonial_exploitation duration = 1095 }
             }
             2066 = {
                 add_core = MLW
-                remove_core = KZB
                 life_rating = 25
+                add_province_modifier = { name = colonial_exploitation duration = 1095 }
             }
             MLW = {
                 primary_culture = THIS
-                capital = 2067
                 add_accepted_culture = chewa
-                tech_school = developing_tech_school
+                tech_school = unciv_tech_school
+                capital = 2067
                 set_country_flag = post_colonial_country
                 clr_country_flag = sunni_country
                 clr_country_flag = shiite_country
@@ -3374,12 +3154,8 @@ political_decisions = {
     }
 
     reorganize_malawi = {
-        picture = map_malawi
+        picture = map_africa
         potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
             civilized = yes
             has_global_flag = malawi_organized
             owns = 2067
@@ -3388,28 +3164,27 @@ political_decisions = {
                 NOT = { is_culture_group = THIS }
             }
             NOT = {
-                has_country_flag = malawi_master
-                capital_scope = { continent = africa }
+                AND = {
+					capital_scope = { continent = africa }
+					NOT = { tag = SAF }
+				}
             }
         }
 
         allow = {
             war = no
-            machine_guns = 1
-            market_regulations = 1
+            revolution_n_counterrevolution = 1
             owns = 2067
         }
 
         effect = {
-            any_country = {
-                limit = { has_country_flag = malawi_master }
-                clr_country_flag = malawi_master
-            }
-            set_country_flag = malawi_master
             prestige = 3
-
-            country_event = 199055
-
+            any_pop = {
+                limit = {
+                    location = { is_core = MLW }
+                }
+                militancy = -3
+            }
             MLW = {
                 primary_culture = THIS
                 clr_country_flag = sunni_country
@@ -3454,45 +3229,40 @@ political_decisions = {
     }
 
     organize_gambia = {
-        picture = map_gambia
+        picture = map_africa
         potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
             civilized = yes
             NOT = {
                 has_global_flag = gambia_organized
-                capital_scope = { continent = africa }
+                AND = {
+					capital_scope = { continent = africa }
+					NOT = { tag = SAF }
+				}
             }
             owns = 1785
         }
 
         allow = {
             war = no
-            machine_guns = 1
-            market_regulations = 1
+            revolution_n_counterrevolution = 1
             owns = 1785
         }
 
         effect = {
             set_global_flag = gambia_organized
             prestige = 3
-            set_country_flag = gambia_master
-
-            1785 = { add_core = GMB }
-
             any_owned = {
-                limit = { is_core = GMB }
+                limit = { region = FRA_1788 }
+                add_core = GMB
                 remove_core = TOO
                 remove_core = WOL
                 remove_core = SEG
                 remove_core = TOU
+                add_province_modifier = { name = colonial_exploitation duration = 1095 }
             }
-
             GMB = {
                 primary_culture = THIS
-                tech_school = developing_tech_school
+                tech_school = unciv_tech_school
                 set_country_flag = post_colonial_country
                 clr_country_flag = sunni_country
                 clr_country_flag = shiite_country
@@ -3536,12 +3306,8 @@ political_decisions = {
     }
 
     reorganize_gambia = {
-        picture = map_gambia
+        picture = map_africa
         potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
             civilized = yes
             has_global_flag = gambia_organized
             owns = 1785
@@ -3550,26 +3316,27 @@ political_decisions = {
                 NOT = { is_culture_group = THIS }
             }
             NOT = {
-                has_country_flag = gambia_master
-                capital_scope = { continent = africa }
+                AND = {
+					capital_scope = { continent = africa }
+					NOT = { tag = SAF }
+				}
             }
         }
 
         allow = {
             war = no
-            machine_guns = 1
-            market_regulations = 1
+            revolution_n_counterrevolution = 1
             owns = 1785
         }
 
         effect = {
-            any_country = {
-                limit = { has_country_flag = gambia_master }
-                clr_country_flag = gambia_master
-            }
-            set_country_flag = gambia_master
             prestige = 3
-
+            any_pop = {
+                limit = {
+                    location = { is_core = GMB }
+                }
+                militancy = -3
+            }
             GMB = {
                 primary_culture = THIS
                 clr_country_flag = sunni_country
@@ -3614,49 +3381,31 @@ political_decisions = {
     }
 
     organize_angola = {
-        picture = map_angola
+        picture = map_africa
         potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
             civilized = yes
             NOT = {
                 has_global_flag = angola_created
-                capital_scope = { continent = africa }
+                AND = {
+					capital_scope = { continent = africa }
+					NOT = { tag = SAF }
+				}
             }
-            any_owned_province = {
-                OR = {
-                    region = POR_2003
-                    region = POR_2006
-                    region = POR_1999
-                }
-            }
+            owns = 1999
+            NOT = { has_global_flag = angola_created }
         }
 
         allow = {
-            war = no
-            machine_guns = 1
-            market_regulations = 1
-            OR = {
-                POR_2003 = { owned_by = THIS }
-                POR_1999 = { owned_by = THIS }
-            }
-            OR = {
-                POR_2006 = { owned_by = THIS }
-                POR_1999 = { owned_by = THIS }
-            }
+            revolution_n_counterrevolution = 1
         }
 
         effect = {
             set_global_flag = angola_created
             prestige = 5
-            set_country_flag = angola_master
-            country_event = 199056
             ANG = {
                 primary_culture = THIS
                 add_accepted_culture = bakongo
-                tech_school = developing_tech_school
+                tech_school = unciv_tech_school
                 set_country_flag = post_colonial_country
                 clr_country_flag = sunni_country
                 clr_country_flag = shiite_country
@@ -3676,16 +3425,19 @@ political_decisions = {
                 clr_country_flag = sikh_country
                 clr_country_flag = animist_country
             }
-
-            2000 = { add_core = ANG }
-            POR_2003 = { add_core = ANG }
-            POR_2006 = { add_core = ANG }
-            POR_1999 = { add_core = ANG }
-
             any_owned = {
-                limit = { is_core = ANG }
-                remove_core = KON
+                limit = {
+                    OR = {
+                        province_id = 2000
+                        region = POR_2003
+                        region = POR_2006
+                        region = POR_1999
+                    }
+                }
+                add_core = ANG
+                add_province_modifier = { name = colonial_exploitation duration = 365 }
             }
+            ANG = { all_core = { remove_core = KON } }
 
             random_owned = { limit = { owner = { has_country_flag = catholic_country } } ANG = { religion = catholic set_country_flag = catholic_country } }
             random_owned = {
@@ -3712,12 +3464,8 @@ political_decisions = {
     }
 
     reorganize_angola = {
-        picture = map_angola
+        picture = map_africa
         potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
             civilized = yes
             has_global_flag = angola_created
             owns = 1999
@@ -3726,30 +3474,25 @@ political_decisions = {
                 NOT = { is_culture_group = THIS }
             }
             NOT = {
-                has_country_flag = angola_master
-                capital_scope = { continent = africa }
+                AND = {
+					capital_scope = { continent = africa }
+					NOT = { tag = SAF }
+				}
             }
         }
 
         allow = {
             war = no
-            machine_guns = 1
-            market_regulations = 1
+            revolution_n_counterrevolution = 1
             owns = 1999
-            owns = 2005
-            owns = 2006
         }
 
         effect = {
-            any_country = {
-                limit = { has_country_flag = angola_master }
-                clr_country_flag = angola_master
-            }
-            set_country_flag = angola_master
             prestige = 3
-
-            country_event = 199056
-
+            any_pop = {
+                limit = { location = { is_core = ANG } }
+                militancy = -3
+            }
             any_owned = {
                 limit = {
                     OR = {
@@ -3805,50 +3548,30 @@ political_decisions = {
     }
 
     organize_mozambique = {
-        picture = map_mozambique
+        picture = map_africa
         potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
+            owns = 2049
             civilized = yes
             NOT = {
                 has_global_flag = mozambique_created
-                capital_scope = { continent = africa }
-            }
-            any_owned_province = {
-                OR = {
-                    region = POR_2060
-                    region = POR_2053
-                    region = POR_2054
-                    region = POR_2049
-                }
+                AND = {
+					capital_scope = { continent = africa }
+					NOT = { tag = SAF }
+				}
             }
         }
 
         allow = {
-            war = no
-            machine_guns = 1
-            market_regulations = 1
-            OR = {
-                POR_2060 = { owned_by = THIS }
-                POR_2053 = { owned_by = THIS }
-            }
-            OR = {
-                POR_2054 = { owned_by = THIS }
-                POR_2049 = { owned_by = THIS }
-            }
+            revolution_n_counterrevolution = 1
         }
 
         effect = {
             set_global_flag = mozambique_created
             prestige = 5
-            set_country_flag = mozambique_master
-            country_event = 199057
             MOZ = {
                 set_country_flag = post_colonial_country
                 primary_culture = THIS
-                tech_school = developing_tech_school
+                tech_school = unciv_tech_school
                 add_accepted_culture = shona
                 clr_country_flag = sunni_country
                 clr_country_flag = shiite_country
@@ -3868,18 +3591,21 @@ political_decisions = {
                 clr_country_flag = sikh_country
                 clr_country_flag = animist_country
             }
-            POR_2060 = { add_core = MOZ }
-            POR_2053 = { add_core = MOZ }
-            POR_2054 = { add_core = MOZ }
-            POR_2049 = { add_core = MOZ }
-
-            MOZ = {
-                all_core = {
-                    remove_core = GAZ
-                    remove_core = AGC
-                    remove_core = ZUL
-                    remove_core = SHO
+            any_owned = {
+                limit = {
+                    OR = {
+                        region = POR_2060
+                        region = POR_2053
+                        region = POR_2054
+                        region = POR_2049
+                    }
                 }
+                add_core = MOZ
+                remove_core = GAZ
+                remove_core = AGC
+                remove_core = ZUL
+                remove_core = SHO
+                add_province_modifier = { name = colonial_exploitation duration = 1049 }
             }
 
             random_owned = { limit = { owner = { has_country_flag = catholic_country } } MOZ = { religion = catholic set_country_flag = catholic_country } }
@@ -3902,33 +3628,34 @@ political_decisions = {
             random_owned = { limit = { owner = { has_country_flag = ibadi_country } } MOZ = { religion = ibadi set_country_flag = ibadi_country } }
             random_owned = { limit = { owner = { has_country_flag = yazidi_country } } MOZ = { religion = yazidi set_country_flag = yazidi_country } }
 
+            2054 = { trade_goods = coal }
             random_owned = {
-                limit = { province_id = 2581 owner = { has_country_flag = portuguese_country } }
+                limit = { province_id = 2581 owner = { tag = POR } }
                 change_province_name = "Vila Cabral"
                 life_rating = 5
             }
             random_owned = {
-                limit = { province_id = 2058 owner = { has_country_flag = portuguese_country } }
+                limit = { province_id = 2058 owner = { tag = POR } }
                 change_province_name = "Vila Pery"
             }
             random_owned = {
-                limit = { province_id = 2057 owner = { has_country_flag = portuguese_country } }
+                limit = { province_id = 2057 owner = { tag = POR } }
                 change_province_name = "Beira"
             }
             random_owned = {
-                limit = { province_id = 2063 owner = { has_country_flag = portuguese_country } }
-                change_province_name = "Porto Amelia"
+                limit = { province_id = 2063 owner = { tag = POR } }
+                change_province_name = "Porto Am?lia"
             }
             random_owned = {
-                limit = { province_id = 2061 owner = { has_country_flag = portuguese_country } }
-                change_province_name = "Antonio Enes"
+                limit = { province_id = 2061 owner = { tag = POR } }
+                change_province_name = "Ant?nio Enes"
             }
             random_owned = {
-                limit = { province_id = 2050 owner = { has_country_flag = portuguese_country } }
-                change_province_name = "Joao Belo"
+                limit = { province_id = 2050 owner = { tag = POR } }
+                change_province_name = "Jo?o Belo"
             }
             random_owned = {
-                limit = { province_id = 2064 owner = { has_country_flag = portuguese_country } }
+                limit = { province_id = 2064 owner = { tag = POR } }
                 change_province_name = "Vila Junqueiro"
             }
             random_owned = {
@@ -3936,18 +3663,18 @@ political_decisions = {
                 change_province_name = "Mocuba"
             }
             random_owned = {
-                limit = { province_id = 2052 owner = { has_country_flag = portuguese_country } }
-                change_province_name = "Malvernia"
+                limit = { province_id = 2052 owner = { tag = POR } }
+                change_province_name = "Malv?rnia"
             }
 
             random_owned = {
-                limit = { province_id = 2049 owner = { has_country_flag = portuguese_country NOT = { has_country_flag = reconquest_of_lourenco_marques } } }
-                change_province_name = "Lourenco Marques"
+                limit = { province_id = 2049 owner = { tag = POR NOT = { has_country_flag = reconquest_of_lourenco_marques } } }
+                change_province_name = "Louren?o Marques"
             }
 
             random_owned = {
-                limit = { province_id = 2049 owner = { has_country_flag = portuguese_country NOT = { has_country_flag = reconquest_of_lourenco_marques } } }
-                2051 = { state_scope = { change_region_name = "Lourenco Marques" } }
+                limit = { province_id = 2051 owner = { tag = POR NOT = { has_country_flag = reconquest_of_lourenco_marques } } }
+                2051 = { state_scope = { change_region_name = "Louren?o Marques" } }
             }
         }
 
@@ -3955,12 +3682,8 @@ political_decisions = {
     }
 
     reorganize_mozambique = {
-        picture = map_mozambique
+        picture = map_africa
         potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
             civilized = yes
             has_global_flag = mozambique_created
             owns = 2049
@@ -3968,30 +3691,24 @@ political_decisions = {
                 exists = no
                 NOT = { is_culture_group = THIS }
             }
-            NOT = {
-                has_country_flag = mozambique_master
-                capital_scope = { continent = africa }
-            }
+            NOT = { AND = {
+					capital_scope = { continent = africa }
+					NOT = { tag = SAF }
+				} }
         }
 
         allow = {
             war = no
-            machine_guns = 1
-            market_regulations = 1
+            revolution_n_counterrevolution = 1
             owns = 2049
-            owns = 2058
-            owns = 2061
-            owns = 2059
         }
 
         effect = {
-            any_country = {
-                limit = { has_country_flag = mozambique_master }
-                clr_country_flag = mozambique_master
-            }
-            set_country_flag = mozambique_master
             prestige = 3
-
+            any_pop = {
+                limit = { location = { is_core = MOZ } }
+                militancy = -3
+            }
             any_owned = {
                 limit = {
                     OR = {
@@ -4051,34 +3768,35 @@ political_decisions = {
     }
 
     organize_algeria = {
-        picture = map_algeria
+        picture = map_africa
         potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
             civilized = yes
             NOT = {
                 exists = ALD
                 has_global_flag = algeria_organized
-                capital_scope = { continent = africa }
+                AND = {
+					capital_scope = { continent = africa }
+					NOT = { tag = SAF }
+				}
             }
             owns = 1700
         }
 
         allow = {
             war = no
-            machine_guns = 1
-            market_regulations = 1
+            revolution_n_counterrevolution = 1
             owns = 1700
         }
 
         effect = {
             set_global_flag = algeria_organized
             prestige = 3
+            any_owned = {
+                limit = { is_core = ALD }
+                add_province_modifier = { name = colonial_exploitation duration = 1095 }
+            }
             ALD = {
-                tech_school = developing_tech_school
-                set_country_flag = post_colonial_country
+                tech_school = unciv_tech_school
                 government = democracy
                 political_reform = landed_voting
                 capital = 1700
@@ -4088,39 +3806,35 @@ political_decisions = {
     }
 
     organize_uganda = {
-        picture = map_uganda
+        picture = map_africa
         potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
             civilized = yes
             NOT = {
                 exists = BUG
                 has_global_flag = uganda_organized
-                capital_scope = { continent = africa }
+                AND = {
+					capital_scope = { continent = africa }
+					NOT = { tag = SAF }
+				}
             }
             owns = 2019
         }
 
         allow = {
             war = no
-            machine_guns = 1
-            market_regulations = 1
+            revolution_n_counterrevolution = 1
             owns = 2019
         }
 
         effect = {
             set_global_flag = uganda_organized
-            prestige = 5
-            set_country_flag = uganda_master
-            country_event = 199058
-
+            prestige = 3
             any_owned = {
-                limit = {
-                    region = ENG_2019
-                    NOT = { life_rating = 12 }
-                }
+                limit = { is_core = BUG }
+                add_province_modifier = { name = colonial_exploitation duration = 1095 }
+            }
+            any_owned = {
+                limit = { region = ENG_2019 }
                 life_rating = 25
             }
             BUG = {
@@ -4129,7 +3843,7 @@ political_decisions = {
                 add_accepted_culture = baganda
                 government = democracy
                 political_reform = landed_voting
-                tech_school = developing_tech_school
+                tech_school = unciv_tech_school
                 clr_country_flag = sunni_country
                 clr_country_flag = shiite_country
                 clr_country_flag = ibadi_country
@@ -4174,12 +3888,8 @@ political_decisions = {
     }
 
     reorganize_uganda = {
-        picture = map_uganda
+        picture = map_africa
         potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
             civilized = yes
             has_global_flag = uganda_organized
             owns = 2019
@@ -4187,28 +3897,24 @@ political_decisions = {
                 exists = no
                 NOT = { is_culture_group = THIS }
             }
-            NOT = {
-                has_country_flag = uganda_master
-                capital_scope = { continent = africa }
-            }
+            NOT = { AND = {
+					capital_scope = { continent = africa }
+					NOT = { tag = SAF }
+				} }
         }
 
         allow = {
             war = no
-            machine_guns = 1
-            market_regulations = 1
+            revolution_n_counterrevolution = 1
             owns = 2019
         }
 
         effect = {
-            any_country = {
-                limit = { has_country_flag = uganda_master }
-                clr_country_flag = uganda_master
-            }
-            set_country_flag = uganda_master
-            country_event = 199058
             prestige = 3
-
+            any_pop = {
+                limit = { location = { is_core = BUG } }
+                militancy = -3
+            }
             BUG = {
                 primary_culture = THIS
                 clr_country_flag = sunni_country
@@ -4253,42 +3959,43 @@ political_decisions = {
     }
 
     organize_botswana = {
-        picture = map_botswana
+        picture = map_africa
         potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
             civilized = yes
             NOT = {
                 exists = TSW
                 has_global_flag = botswana_organized
-                capital_scope = { continent = africa }
+                AND = {
+					capital_scope = { continent = africa }
+					NOT = { tag = SAF }
+				}
             }
             owns = 2074
         }
 
         allow = {
             war = no
-            machine_guns = 1
-            market_regulations = 1
+            revolution_n_counterrevolution = 1
             owns = 2074
         }
 
         effect = {
             set_global_flag = botswana_organized
-            prestige = 5
-            set_country_flag = botswana_master
-            country_event = 199059
 
+            prestige = 3
+            TSW = {
+                all_core = {
+                    remove_core = MAT
+                    add_province_modifier = { name = colonial_exploitation duration = 1095 }
+                }
+            }
             TSW = {
                 set_country_flag = post_colonial_country
-                civilized = no
                 primary_culture = THIS
                 add_accepted_culture = tswana
                 government = democracy
                 political_reform = landed_voting
-                tech_school = developing_tech_school
+                tech_school = unciv_tech_school
                 clr_country_flag = sunni_country
                 clr_country_flag = shiite_country
                 clr_country_flag = ibadi_country
@@ -4306,8 +4013,6 @@ political_decisions = {
                 clr_country_flag = shinto_country
                 clr_country_flag = sikh_country
                 clr_country_flag = animist_country
-                all_core = { remove_core = MAT }
-                any_pop = { limit = { has_pop_religion = animist } literacy = -0.99 }
             }
 
             random_owned = { limit = { owner = { has_country_flag = catholic_country } } TSW = { religion = catholic set_country_flag = catholic_country } }
@@ -4333,12 +4038,8 @@ political_decisions = {
     }
 
     reorganize_botswana = {
-        picture = map_botswana
+        picture = map_africa
         potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
             civilized = yes
             has_global_flag = botswana_organized
             owns = 2074
@@ -4346,28 +4047,24 @@ political_decisions = {
                 exists = no
                 NOT = { is_culture_group = THIS }
             }
-            NOT = {
-                has_country_flag = botswana_master
-                capital_scope = { continent = africa }
-            }
+            NOT = { AND = {
+					capital_scope = { continent = africa }
+					NOT = { tag = SAF }
+				} }
         }
 
         allow = {
             war = no
-            machine_guns = 1
-            market_regulations = 1
+            revolution_n_counterrevolution = 1
             owns = 2074
         }
 
         effect = {
             prestige = 3
-            any_country = {
-                limit = { has_country_flag = botswana_master }
-                clr_country_flag = botswana_master
+            any_pop = {
+                limit = { location = { is_core = TSW } }
+                militancy = -3
             }
-            set_country_flag = botswana_master
-            country_event = 199059
-
             any_owned = {
                 limit = { is_core = TSW }
                 remove_core = MAT
@@ -4416,186 +4113,125 @@ political_decisions = {
     }
 
     organize_zanzibar = {
-        picture = map_zanzibar
+        picture = map_africa
         potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
             civilized = yes
             NOT = {
                 owns = 2044
                 exists = ZAN
                 has_global_flag = zanzibar_organized
-                capital_scope = { continent = africa }
+                AND = {
+					capital_scope = { continent = africa }
+					NOT = { tag = SAF }
+				}
             }
             owns = 2048
         }
 
         allow = {
             war = no
-            machine_guns = 1
-            market_regulations = 1
+            revolution_n_counterrevolution = 1
             owns = 2048
         }
 
         effect = {
             set_global_flag = zanzibar_organized
             prestige = 3
+            any_owned = {
+                limit = { is_core = ZAN }
+                add_province_modifier = { name = colonial_exploitation duration = 1095 }
+            }
             ZAN = {
                 set_country_flag = post_colonial_country
                 government = democracy
                 political_reform = landed_voting
-                tech_school = developing_tech_school
+                tech_school = unciv_tech_school
             }
         }
     }
 
     organize_sudan = {
-        picture = map_sudan
+        picture = map_africa
         potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
             civilized = yes
             NOT = {
                 exists = SUD
                 has_global_flag = sudan_organized
-                capital_scope = { continent = africa }
+                AND = {
+					capital_scope = { continent = africa }
+					NOT = { tag = SAF }
+				}
                 OR = {
                     tag = EGY
                     1827 = { is_core = EGY }
                 }
             }
-            any_owned_province = { is_core = SUD }
+
+            SUD = { all_core = { owned_by = THIS } }
         }
 
         allow = {
             war = no
-            machine_guns = 1
-            market_regulations = 1
-            OR = {
-                ENG_1844 = { owned_by = THIS }
-                EGY_1838 = { owned_by = THIS }
-            }
-            OR = {
-                EGY_1834 = { owned_by = THIS }
-                EGY_1827 = { owned_by = THIS }
-            }
+            revolution_n_counterrevolution = 1
+            owns = 1827
         }
 
         effect = {
             set_global_flag = sudan_organized
-            prestige = 5
-            set_country_flag = sudan_master
-            country_event = 199060
-            SUD = {
-                all_core = {
-                    remove_core = EGY
-                    remove_core = SHK
-                    remove_core = DAR
-                    remove_core = AZA
+            prestige = 3
+            any_owned = {
+                limit = { is_core = SUD }
+                add_province_modifier = {
+                    name = colonial_exploitation
+                    duration = 1095
                 }
+            }
+            SUD = {
+                all_core = { remove_core = EGY remove_core = SHK remove_core = DAR remove_core = AZA }
                 set_country_flag = post_colonial_country
                 government = democracy
                 political_reform = landed_voting
-                tech_school = developing_tech_school
+                tech_school = unciv_tech_school
             }
-        }
-    }
-
-    reorganize_sudan = {
-        picture = map_sudan
-        potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
-            civilized = yes
-            has_global_flag = sudan_organized
-            NOT = { has_country_flag = sudan_master }
-            owns = 1827
-            SUD = {
-                exists = no
-                NOT = { is_culture_group = THIS }
-            }
-            NOT = { capital_scope = { continent = africa } }
-        }
-
-        allow = {
-            war = no
-            machine_guns = 1
-            market_regulations = 1
-            owns = 1827
-            owns = 1835
-            owns = 1838
-        }
-
-        effect = {
-            set_global_flag = sudan_organized
-            prestige = 5
-            any_country = {
-                limit = { has_country_flag = sudan_master }
-                clr_country_flag = sudan_master
-            }
-            set_country_flag = sudan_master
-            country_event = 199060
-
         }
     }
 
     organize_ghana = {
-        picture = map_ghana
+        picture = map_africa
         potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
             civilized = yes
             NOT = {
-                exists = GHN
+                exists = ASH
                 has_global_flag = ghana_organized
-                capital_scope = { continent = africa }
+                AND = {
+					capital_scope = { continent = africa }
+					NOT = { tag = SAF }
+				}
             }
-            any_owned_province = {
-                OR = {
-                    region = ASH_1909
-                    region = FRA_1907
-                }
-            }
+            owns = 1910
         }
 
         allow = {
             war = no
-            machine_guns = 1
-            market_regulations = 1
-            OR = {
-                ASH_1909 = { owned_by = THIS }
-                FRA_1907 = { owned_by = THIS }
-            }
+            revolution_n_counterrevolution = 1
+            owns = 1910
         }
 
         effect = {
             set_global_flag = ghana_organized
-            prestige = 5
-            set_country_flag = ghana_master
-            country_event = 199061
-            ASH = {
-                all_core = {
-                    add_core = GHN
-                    remove_core = MOS
-                    remove_core = ASH
-                }
+            prestige = 3
+            any_owned = {
+                limit = { is_core = ASH }
+                remove_core = MOS
+                add_province_modifier = { name = colonial_exploitation duration = 1095 }
             }
-
-            GHN = {
+            ASH = {
                 set_country_flag = post_colonial_country
                 government = democracy
                 political_reform = landed_voting
                 primary_culture = THIS
                 add_accepted_culture = akan
-                tech_school = developing_tech_school
+                tech_school = unciv_tech_school
                 clr_country_flag = sunni_country
                 clr_country_flag = shiite_country
                 clr_country_flag = ibadi_country
@@ -4615,69 +4251,61 @@ political_decisions = {
                 clr_country_flag = animist_country
             }
 
-            random_owned = { limit = { owner = { has_country_flag = catholic_country } } GHN = { religion = catholic set_country_flag = catholic_country } }
+            random_owned = { limit = { owner = { has_country_flag = catholic_country } } ASH = { religion = catholic set_country_flag = catholic_country } }
             random_owned = {
                 limit = { owner = { has_country_flag = protestant_country } }
-                GHN = { religion = protestant set_country_flag = protestant_country }
+                ASH = { religion = protestant set_country_flag = protestant_country }
             }
-            random_owned = { limit = { owner = { has_country_flag = orthodox_country } } GHN = { religion = orthodox set_country_flag = orthodox_country } }
-            random_owned = { limit = { owner = { has_country_flag = mormon_country } } GHN = { religion = mormon set_country_flag = mormon_country } }
-            random_owned = { limit = { owner = { has_country_flag = coptic_country } } GHN = { religion = coptic set_country_flag = coptic_country } }
-            random_owned = { limit = { owner = { has_country_flag = sunni_country } } GHN = { religion = sunni set_country_flag = sunni_country } }
-            random_owned = { limit = { owner = { has_country_flag = shiite_country } } GHN = { religion = shiite set_country_flag = shiite_country } }
-            random_owned = { limit = { owner = { has_country_flag = shinto_country } } GHN = { religion = shinto set_country_flag = shinto_country } }
-            random_owned = { limit = { owner = { has_country_flag = mahayana_country } } GHN = { religion = mahayana set_country_flag = mahayana_country } }
-            random_owned = { limit = { owner = { has_country_flag = gelugpa_country } } GHN = { religion = gelugpa set_country_flag = gelugpa_country } }
-            random_owned = { limit = { owner = { has_country_flag = theravada_country } } GHN = { religion = theravada set_country_flag = theravada_country } }
-            random_owned = { limit = { owner = { has_country_flag = hindu_country } } GHN = { religion = hindu set_country_flag = hindu_country } }
-            random_owned = { limit = { owner = { has_country_flag = sikh_country } } GHN = { religion = sikh set_country_flag = sikh_country } }
-            random_owned = { limit = { owner = { has_country_flag = jewish_country } } GHN = { religion = jewish set_country_flag = jewish_country } }
-            random_owned = { limit = { owner = { has_country_flag = ibadi_country } } GHN = { religion = ibadi set_country_flag = ibadi_country } }
-            random_owned = { limit = { owner = { has_country_flag = yazidi_country } } GHN = { religion = yazidi set_country_flag = yazidi_country } }
+            random_owned = { limit = { owner = { has_country_flag = orthodox_country } } ASH = { religion = orthodox set_country_flag = orthodox_country } }
+            random_owned = { limit = { owner = { has_country_flag = mormon_country } } ASH = { religion = mormon set_country_flag = mormon_country } }
+            random_owned = { limit = { owner = { has_country_flag = coptic_country } } ASH = { religion = coptic set_country_flag = coptic_country } }
+            random_owned = { limit = { owner = { has_country_flag = sunni_country } } ASH = { religion = sunni set_country_flag = sunni_country } }
+            random_owned = { limit = { owner = { has_country_flag = shiite_country } } ASH = { religion = shiite set_country_flag = shiite_country } }
+            random_owned = { limit = { owner = { has_country_flag = shinto_country } } ASH = { religion = shinto set_country_flag = shinto_country } }
+            random_owned = { limit = { owner = { has_country_flag = mahayana_country } } ASH = { religion = mahayana set_country_flag = mahayana_country } }
+            random_owned = { limit = { owner = { has_country_flag = gelugpa_country } } ASH = { religion = gelugpa set_country_flag = gelugpa_country } }
+            random_owned = { limit = { owner = { has_country_flag = theravada_country } } ASH = { religion = theravada set_country_flag = theravada_country } }
+            random_owned = { limit = { owner = { has_country_flag = hindu_country } } ASH = { religion = hindu set_country_flag = hindu_country } }
+            random_owned = { limit = { owner = { has_country_flag = sikh_country } } ASH = { religion = sikh set_country_flag = sikh_country } }
+            random_owned = { limit = { owner = { has_country_flag = jewish_country } } ASH = { religion = jewish set_country_flag = jewish_country } }
+            random_owned = { limit = { owner = { has_country_flag = ibadi_country } } ASH = { religion = ibadi set_country_flag = ibadi_country } }
+            random_owned = { limit = { owner = { has_country_flag = yazidi_country } } ASH = { religion = yazidi set_country_flag = yazidi_country } }
         }
     }
 
     reorganize_ghana = {
-        picture = map_ghana
+        picture = map_africa
         potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
             civilized = yes
             has_global_flag = ghana_organized
             owns = 1910
-            GHN = {
+            ASH = {
                 exists = no
                 NOT = { is_culture_group = THIS }
             }
-            NOT = {
-                has_country_flag = ghana_master
-                capital_scope = { continent = africa }
-            }
+            NOT = { AND = {
+					capital_scope = { continent = africa }
+					NOT = { tag = SAF }
+				} }
         }
 
         allow = {
             war = no
-            machine_guns = 1
-            market_regulations = 1
+            revolution_n_counterrevolution = 1
             owns = 1910
-            owns = 1911
         }
 
         effect = {
-            any_country = {
-                limit = { has_country_flag = ghana_master }
-                clr_country_flag = ghana_master
+            prestige = 3
+            any_pop = {
+                limit = { location = { is_core = ASH } }
+                militancy = -3
             }
-            set_country_flag = ghana_master
-            country_event = 199061
-
             any_owned = {
-                limit = { is_core = GHN }
+                limit = { is_core = ASH }
                 remove_core = MOS
             }
-            GHN = {
+            ASH = {
                 primary_culture = THIS
                 clr_country_flag = sunni_country
                 clr_country_flag = shiite_country
@@ -4698,57 +4326,52 @@ political_decisions = {
                 clr_country_flag = animist_country
             }
 
-            random_owned = { limit = { owner = { has_country_flag = catholic_country } } GHN = { religion = catholic set_country_flag = catholic_country } }
+            random_owned = { limit = { owner = { has_country_flag = catholic_country } } ASH = { religion = catholic set_country_flag = catholic_country } }
             random_owned = {
                 limit = { owner = { has_country_flag = protestant_country } }
-                GHN = { religion = protestant set_country_flag = protestant_country }
+                ASH = { religion = protestant set_country_flag = protestant_country }
             }
-            random_owned = { limit = { owner = { has_country_flag = orthodox_country } } GHN = { religion = orthodox set_country_flag = orthodox_country } }
-            random_owned = { limit = { owner = { has_country_flag = mormon_country } } GHN = { religion = mormon set_country_flag = mormon_country } }
-            random_owned = { limit = { owner = { has_country_flag = coptic_country } } GHN = { religion = coptic set_country_flag = coptic_country } }
-            random_owned = { limit = { owner = { has_country_flag = sunni_country } } GHN = { religion = sunni set_country_flag = sunni_country } }
-            random_owned = { limit = { owner = { has_country_flag = shiite_country } } GHN = { religion = shiite set_country_flag = shiite_country } }
-            random_owned = { limit = { owner = { has_country_flag = shinto_country } } GHN = { religion = shinto set_country_flag = shinto_country } }
-            random_owned = { limit = { owner = { has_country_flag = mahayana_country } } GHN = { religion = mahayana set_country_flag = mahayana_country } }
-            random_owned = { limit = { owner = { has_country_flag = gelugpa_country } } GHN = { religion = gelugpa set_country_flag = gelugpa_country } }
-            random_owned = { limit = { owner = { has_country_flag = theravada_country } } GHN = { religion = theravada set_country_flag = theravada_country } }
-            random_owned = { limit = { owner = { has_country_flag = hindu_country } } GHN = { religion = hindu set_country_flag = hindu_country } }
-            random_owned = { limit = { owner = { has_country_flag = sikh_country } } GHN = { religion = sikh set_country_flag = sikh_country } }
-            random_owned = { limit = { owner = { has_country_flag = jewish_country } } GHN = { religion = jewish set_country_flag = jewish_country } }
-            random_owned = { limit = { owner = { has_country_flag = ibadi_country } } GHN = { religion = ibadi set_country_flag = ibadi_country } }
-            random_owned = { limit = { owner = { has_country_flag = yazidi_country } } GHN = { religion = yazidi set_country_flag = yazidi_country } }
+            random_owned = { limit = { owner = { has_country_flag = orthodox_country } } ASH = { religion = orthodox set_country_flag = orthodox_country } }
+            random_owned = { limit = { owner = { has_country_flag = mormon_country } } ASH = { religion = mormon set_country_flag = mormon_country } }
+            random_owned = { limit = { owner = { has_country_flag = coptic_country } } ASH = { religion = coptic set_country_flag = coptic_country } }
+            random_owned = { limit = { owner = { has_country_flag = sunni_country } } ASH = { religion = sunni set_country_flag = sunni_country } }
+            random_owned = { limit = { owner = { has_country_flag = shiite_country } } ASH = { religion = shiite set_country_flag = shiite_country } }
+            random_owned = { limit = { owner = { has_country_flag = shinto_country } } ASH = { religion = shinto set_country_flag = shinto_country } }
+            random_owned = { limit = { owner = { has_country_flag = mahayana_country } } ASH = { religion = mahayana set_country_flag = mahayana_country } }
+            random_owned = { limit = { owner = { has_country_flag = gelugpa_country } } ASH = { religion = gelugpa set_country_flag = gelugpa_country } }
+            random_owned = { limit = { owner = { has_country_flag = theravada_country } } ASH = { religion = theravada set_country_flag = theravada_country } }
+            random_owned = { limit = { owner = { has_country_flag = hindu_country } } ASH = { religion = hindu set_country_flag = hindu_country } }
+            random_owned = { limit = { owner = { has_country_flag = sikh_country } } ASH = { religion = sikh set_country_flag = sikh_country } }
+            random_owned = { limit = { owner = { has_country_flag = jewish_country } } ASH = { religion = jewish set_country_flag = jewish_country } }
+            random_owned = { limit = { owner = { has_country_flag = ibadi_country } } ASH = { religion = ibadi set_country_flag = ibadi_country } }
+            random_owned = { limit = { owner = { has_country_flag = yazidi_country } } ASH = { religion = yazidi set_country_flag = yazidi_country } }
         }
     }
 
     organize_burkina_faso = {
-        picture = map_burkina_faso
+        picture = map_africa
         potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
             civilized = yes
             NOT = {
                 exists = BKF
                 has_global_flag = burkina_faso_organized
-                capital_scope = { continent = africa }
+                AND = {
+					capital_scope = { continent = africa }
+					NOT = { tag = SAF }
+				}
             }
-            any_owned_province = { region = FRA_1901 }
+            owns = 1901
         }
 
         allow = {
             war = no
-            machine_guns = 1
-            market_regulations = 1
-            FRA_1901 = { owned_by = THIS }
+            revolution_n_counterrevolution = 1
+            owns = 1901
         }
 
         effect = {
             set_global_flag = burkina_faso_organized
-            prestige = 5
-            set_country_flag = burkina_master
-            country_event = 199062
-
+            prestige = 3
             random_owned = { limit = { owner = { primary_culture = french } } 1901 = { change_province_name = "Ouagadougou" } }
             FRA_1901 = {
                 add_core = BKF
@@ -4756,13 +4379,14 @@ political_decisions = {
                 remove_core = TOU
                 remove_core = MAS
                 remove_core = MOS
+                add_province_modifier = { name = colonial_exploitation duration = 1095 }
             }
 
             BKF = {
                 set_country_flag = post_colonial_country
                 government = democracy
                 political_reform = landed_voting
-                tech_school = developing_tech_school
+                tech_school = unciv_tech_school
                 primary_culture = THIS
                 add_accepted_culture = mossi
                 clr_country_flag = sunni_country
@@ -4807,12 +4431,8 @@ political_decisions = {
     }
 
     reorganize_burkina_faso = {
-        picture = map_burkina_faso
+        picture = map_africa
         potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
             civilized = yes
             has_global_flag = burkina_faso_organized
             owns = 1901
@@ -4820,28 +4440,24 @@ political_decisions = {
                 exists = no
                 NOT = { is_culture_group = THIS }
             }
-            NOT = {
-                has_country_flag = burkina_master
-                capital_scope = { continent = africa }
-            }
+            NOT = { AND = {
+					capital_scope = { continent = africa }
+					NOT = { tag = SAF }
+				} }
         }
 
         allow = {
             war = no
-            machine_guns = 1
-            market_regulations = 1
+            revolution_n_counterrevolution = 1
             owns = 1901
         }
 
         effect = {
             prestige = 3
-            any_country = {
-                limit = { has_country_flag = burkina_master }
-                clr_country_flag = burkina_master
+            any_pop = {
+                limit = { location = { is_core = BKF } }
+                militancy = -3
             }
-            set_country_flag = burkina_master
-            country_event = 199062
-
             any_owned = {
                 limit = { is_core = BKF }
                 remove_core = SEG
@@ -4892,89 +4508,81 @@ political_decisions = {
         }
     }
 
-    organize_mauritania = {
-        picture = map_mauritania
+    organize_mauretania = {
+        picture = map_africa
         potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
             civilized = yes
             NOT = {
                 exists = TRZ
                 has_global_flag = mauretania_organized
-                capital_scope = { continent = africa }
+                AND = {
+					capital_scope = { continent = africa }
+					NOT = { tag = SAF }
+				}
             }
             owns = 1775
         }
 
         allow = {
             war = no
-            machine_guns = 1
-            market_regulations = 1
+            revolution_n_counterrevolution = 1
             owns = 1775
-            owns = 1782
         }
 
         effect = {
             set_global_flag = mauretania_organized
-            prestige = 3
+            #1779 = { add_core = TRZ }
             FRA_1775 = { add_core = TRZ }
-            1782 = { trade_goods = iron }
-            1782 = {
-                state_scope = {
-                    change_region_name = "Mauritania"
-                }
+            prestige = 3
+            any_owned = {
+                limit = { is_core = TRZ }
+                add_province_modifier = { name = colonial_exploitation duration = 1095 }
             }
             TRZ = {
                 set_country_flag = post_colonial_country
                 government = democracy
                 political_reform = landed_voting
-                tech_school = developing_tech_school
+                tech_school = unciv_tech_school
             }
         }
     }
 
     organize_dahomey = {
-        picture = map_dahomey
+        picture = map_africa
         potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
             civilized = yes
             NOT = {
                 exists = DAH
                 has_global_flag = dahomey_organized
-                capital_scope = { continent = africa }
+                AND = {
+					capital_scope = { continent = africa }
+					NOT = { tag = SAF }
+				}
             }
             owns = 1920
         }
 
         allow = {
             war = no
-            machine_guns = 1
-            market_regulations = 1
+            revolution_n_counterrevolution = 1
             owns = 1920
         }
 
         effect = {
             set_global_flag = dahomey_organized
             prestige = 3
-            set_country_flag = dahomey_master
-            country_event = 199063
-
             FRA_1919 = {
                 add_core = DAH
                 remove_core = TOU
                 remove_core = MAS
+                add_province_modifier = { name = colonial_exploitation duration = 1095 }
             }
             1919 = { change_province_name = Porto-Novo }
             DAH = {
                 set_country_flag = post_colonial_country
                 government = democracy
                 political_reform = landed_voting
-                tech_school = developing_tech_school
+                tech_school = unciv_tech_school
                 primary_culture = THIS
                 add_accepted_culture = fon
                 capital = 1919
@@ -5020,12 +4628,8 @@ political_decisions = {
     }
 
     reorganize_dahomey = {
-        picture = map_dahomey
+        picture = map_africa
         potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
             civilized = yes
             has_global_flag = dahomey_organized
             owns = 1920
@@ -5033,25 +4637,24 @@ political_decisions = {
                 exists = no
                 NOT = { is_culture_group = THIS }
             }
-            NOT = { capital_scope = { continent = africa } }
+            NOT = { AND = {
+					capital_scope = { continent = africa }
+					NOT = { tag = SAF }
+				} }
         }
 
         allow = {
             war = no
-            machine_guns = 1
-            market_regulations = 1
+            revolution_n_counterrevolution = 1
             owns = 1920
         }
 
         effect = {
             prestige = 3
-            any_country = {
-                limit = { has_country_flag = dahomey_master }
-                clr_country_flag = dahomey_master
+            any_pop = {
+                limit = { location = { is_core = DAH } }
+                militancy = -3
             }
-            set_country_flag = dahomey_master
-            country_event = 199063
-
             any_owned = {
                 limit = { is_core = DAH }
                 remove_core = SEG
@@ -5102,13 +4705,10 @@ political_decisions = {
         }
     }
 
+
     organize_indonesia = {
-        picture = map_indonesia
+        picture = map_east_indies
         potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
             civilized = yes
             NOT = {
                 exists = INO
@@ -5116,23 +4716,19 @@ political_decisions = {
                 has_global_flag = indonesia_formed
                 is_culture_group = southeast_asian
             }
-            nationalism_n_imperialism = 1
+            state_n_government = 1
             owns = 1413
         }
 
         allow = {
             war = no
-            machine_guns = 1
-            market_regulations = 1
+            revolution_n_counterrevolution = 1
             owns = 1413
         }
 
         effect = {
             set_global_flag = indonesia_organized
             prestige = 5
-            set_country_flag = indonesia_master
-            country_event = 199064
-
             any_owned = {
                 limit = {
                     OR = {
@@ -5153,6 +4749,7 @@ political_decisions = {
                     }
                 }
                 add_core = INO
+                add_province_modifier = { name = colonial_exploitation duration = 1095 }
             }
 
             any_owned = {
@@ -5169,7 +4766,6 @@ political_decisions = {
                 remove_core = MAL
                 remove_core = KLM
                 remove_core = LAN
-                remove_core = PNK
                 remove_core = KTI
                 remove_core = SUL
                 remove_core = BRU
@@ -5178,7 +4774,7 @@ political_decisions = {
 
             INO = {
                 set_country_flag = post_colonial_country
-                tech_school = developing_tech_school
+                tech_school = unciv_tech_school
             }
             random_owned = { limit = { is_core = INO any_pop = { has_pop_culture = malay } } INO = { add_accepted_culture = malay } }
             random_owned = { limit = { is_core = INO any_pop = { has_pop_culture = moluccan } } INO = { add_accepted_culture = moluccan } }
@@ -5190,80 +4786,23 @@ political_decisions = {
         ai_will_do = { factor = 1 }
     }
 
-    reorganize_indonesia = {
-        picture = map_indonesia
-        potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
-            civilized = yes
-            has_global_flag = indonesia_organized
-            owns = 1413
-            NOT = {
-                has_country_flag = indonesia_master
-                exists = INO
-            }
-        }
-
-        allow = {
-            war = no
-            machine_guns = 1
-            market_regulations = 1
-            owns = 1413
-        }
-
-        effect = {
-            prestige = 3
-            any_country = {
-                limit = { has_country_flag = indonesia_master }
-                clr_country_flag = indonesia_master
-            }
-            set_country_flag = indonesia_master
-            country_event = 199064
-
-            any_owned = {
-                limit = {
-                    is_core = INO
-                    NOT = { province_id = 1446 province_id = 2647 }
-                }
-                remove_core = JAV
-                remove_core = DJA
-                remove_core = SAK
-                remove_core = ATJ
-                remove_core = BAL
-                remove_core = SLW
-                remove_core = MAL
-                remove_core = KLM
-                remove_core = LAN
-                remove_core = PNK
-                remove_core = KTI
-                remove_core = SUL
-                remove_core = BRU
-                remove_core = PPG
-            }
-        }
-    }
 
     organize_somalia = {
-        picture = map_somalia
+        picture = map_africa
         potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
             civilized = yes
             NOT = { exists = SOM }
-            nationalism_n_imperialism = 1
-            NOT = { capital_scope = { continent = africa } }
+            state_n_government = 1
+            NOT = { AND = {
+					capital_scope = { continent = africa }
+					NOT = { tag = SAF }
+				} }
             NOT = { has_global_flag = somalia_united }
             owns = 1868
         }
 
         allow = {
             war = no
-            machine_guns = 1
-            market_regulations = 1
             1868 = { owned_by = THIS }
             1872 = { owned_by = THIS }
             NOT = { exists = GEL }
@@ -5274,12 +4813,7 @@ political_decisions = {
 
         effect = {
             set_global_flag = somalia_united
-            prestige = 5
-
-            1869 = { trade_goods = fruit }
-            1870 = { trade_goods = fruit }
-            1868 = { trade_goods = cotton }
-
+            prestige = 2
             SOM_1868 = { add_core = SOM }
             SOM_1872 = { add_core = SOM }
             HBY = { all_core = { remove_core = HBY } }
@@ -5291,32 +4825,25 @@ political_decisions = {
             1867 = { add_core = SOM }
             2031 = { add_core = SOM }
             2032 = { add_core = SOM }
-            SOM = {
-                set_country_flag = post_colonial_country
-                tech_school = developing_tech_school
-                nationalvalue = nv_tradition
-            }
+            SOM = { tech_school = unciv_tech_school nationalvalue = nv_tradition }
         }
     }
 
+
     organize_timor = {
-        picture = map_timor
+        picture = moluccan_map
         potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
             civilized = yes
             NOT = { exists = TMR }
-            nationalism_n_imperialism = 1
+            state_n_government = 1
             NOT = { has_global_flag = timor_organized }
             owns = 1446
+            NOT = { tag = TMR }
+            revolution_n_counterrevolution = 1
         }
 
         allow = {
             war = no
-            machine_guns = 1
-            market_regulations = 1
             owns = 1446
         }
 
@@ -5334,7 +4861,7 @@ political_decisions = {
                 add_core = TMR
             }
             TMR = {
-                tech_school = developing_tech_school
+                tech_school = unciv_tech_school
                 nationalvalue = nv_autocracy
                 religion = catholic set_country_flag = catholic_country
                 primary_culture = THIS
@@ -5379,16 +4906,22 @@ political_decisions = {
             random_owned = { limit = { owner = { has_country_flag = jewish_country } } TMR = { religion = jewish set_country_flag = jewish_country } }
             random_owned = { limit = { owner = { has_country_flag = ibadi_country } } TMR = { religion = ibadi set_country_flag = ibadi_country } }
             random_owned = { limit = { owner = { has_country_flag = yazidi_country } } TMR = { religion = yazidi set_country_flag = yazidi_country } }
+
+            any_owned = {
+                limit = { is_core = TMR }
+                remove_core = BAL
+                remove_core = MAL
+                add_province_modifier = {
+                    name = colonial_exploitation
+                    duration = 1095
+                }
+            }
         }
     }
 
     reorganize_timor = {
-        picture = map_timor
+        picture = moluccan_map
         potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
             civilized = yes
             has_global_flag = timor_organized
             owns = 1446
@@ -5396,12 +4929,11 @@ political_decisions = {
                 exists = no
                 NOT = { is_culture_group = THIS }
             }
+            NOT = { tag = TMR }
         }
 
         allow = {
             war = no
-            machine_guns = 1
-            market_regulations = 1
             owns = 1446
         }
 
@@ -5462,34 +4994,36 @@ political_decisions = {
     }
 
     organize_namibia = {
-        picture = map_namibia
+        picture = map_africa
         potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
             civilized = yes
             NOT = {
                 exists = NMB
                 has_global_flag = namibia_organized
-                capital_scope = { continent = africa }
+                AND = {
+					capital_scope = { continent = africa }
+					NOT = { tag = SAF }
+				}
             }
             owns = 2078
         }
 
         allow = {
             war = no
-            machine_guns = 1
-            market_regulations = 1
+            mass_politics = 1
             owns = 2078
         }
 
         effect = {
             set_global_flag = namibia_organized
-            prestige = 5
-            set_country_flag = namibia_master
-            2080 = { trade_goods = iron }
-
+            prestige = 3
+            any_owned = {
+                limit = { is_core = NMB }
+                add_province_modifier = {
+                    name = colonial_exploitation
+                    duration = 1095
+                }
+            }
             random_owned = { limit = { owner = { is_culture_group = germanic owns = 2081 } } 2081 = { change_province_name = "Schuckmannsburg" add_core = NMB } }
             random_owned = {
                 limit = { owner = { NOT = { is_culture_group = germanic owns = 2081 } } }
@@ -5517,7 +5051,7 @@ political_decisions = {
                 add_accepted_culture = khoisan
                 government = democracy
                 political_reform = landed_voting
-                tech_school = developing_tech_school
+                tech_school = unciv_tech_school
                 clr_country_flag = sunni_country
                 clr_country_flag = shiite_country
                 clr_country_flag = ibadi_country
@@ -5560,12 +5094,8 @@ political_decisions = {
     }
 
     reorganize_namibia = {
-        picture = map_namibia
+        picture = map_africa
         potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
             civilized = yes
             has_global_flag = namibia_organized
             owns = 2078
@@ -5573,28 +5103,27 @@ political_decisions = {
                 exists = no
                 NOT = { is_culture_group = THIS }
             }
-            NOT = {
-                has_country_flag = namibia_master
-                capital_scope = { continent = africa }
-            }
+            NOT = { AND = {
+					capital_scope = { continent = africa }
+					NOT = { tag = SAF }
+				} }
         }
 
         allow = {
             war = no
-            machine_guns = 1
-            market_regulations = 1
+            revolution_n_counterrevolution = 1
             owns = 2078
-            owns = 2084
         }
 
         effect = {
             prestige = 3
-            any_country = {
-                limit = { has_country_flag = namibia_master }
-                clr_country_flag = namibia_master
-            }
-            set_country_flag = namibia_master
 
+            any_pop = {
+                limit = {
+                    location = { is_core = NMB }
+                }
+                militancy = -3
+            }
             NMB = {
                 primary_culture = THIS
                 clr_country_flag = sunni_country
@@ -5649,10 +5178,6 @@ political_decisions = {
     organize_lebanon = {
         picture = map_arabia
         potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
             civilized = yes
             NOT = { has_global_flag = lebanon_organized }
             owns = 912
@@ -5660,6 +5185,7 @@ political_decisions = {
             owns = 914
             owns = 915
             LBN = { exists = no }
+            NOT = { tag = LBN }
             year = 1870
         }
 
@@ -5673,7 +5199,7 @@ political_decisions = {
             prestige = 3
             set_global_flag = lebanon_organized
             set_country_flag = lebanon_organizer
-            LBN = { tech_school = developing_tech_school }
+            LBN = { tech_school = unciv_tech_school }
             random_owned = {
                 limit = {
                     owner = {
@@ -5734,13 +5260,10 @@ political_decisions = {
         }
     }
 
+
     reorganize_lebanon = {
         picture = map_arabia
         potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
             civilized = yes
             has_global_flag = lebanon_organized
             OR = {
@@ -5754,6 +5277,7 @@ political_decisions = {
             }
             NOT = { tag = LBN }
             NOT = { has_country_flag = lebanon_organizer }
+            year = 1870
         }
 
         allow = {
@@ -5834,40 +5358,38 @@ political_decisions = {
     }
 
     organize_guine_bissau = {
-        picture = map_bissau
+        picture = map_africa
         potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
             civilized = yes
             NOT = {
                 exists = GBU
                 has_global_flag = guine_bissau_organized
-                capital_scope = { continent = africa }
+                AND = {
+					capital_scope = { continent = africa }
+					NOT = { tag = SAF }
+				}
             }
-            any_owned_province = { region = FRA_1878 }
+            owns = 1877
         }
 
         allow = {
             war = no
-            machine_guns = 1
-            market_regulations = 1
+            revolution_n_counterrevolution = 1
             owns = 1877
+            owns = 1878
         }
 
         effect = {
             set_global_flag = guine_bissau_organized
-            prestige = 5
-            set_country_flag = guine_bissau_master
-            country_event = 199065
+            prestige = 1
+            GBU = { all_core = { remove_core = GBU } }
+            1877 = { add_core = GBU }
+            1878 = { add_core = GBU }
 
-            FRA_1878 = { add_core = GBU }
-            GBU = {
-                all_core = {
-                    remove_core = GBU
-                    remove_core = JAL
-                }
+            any_owned = {
+                limit = { is_core = GBU }
+                remove_core = JAL
+                add_province_modifier = { name = colonial_exploitation duration = 1095 }
             }
 
             GBU = {
@@ -5877,7 +5399,7 @@ political_decisions = {
                 add_accepted_culture = western_nigritic
                 government = democracy
                 political_reform = landed_voting
-                tech_school = developing_tech_school
+                tech_school = unciv_tech_school
                 clr_country_flag = sunni_country
                 clr_country_flag = shiite_country
                 clr_country_flag = ibadi_country
@@ -5920,12 +5442,8 @@ political_decisions = {
     }
 
     reorganize_guine_bissau = {
-        picture = map_bissau
+        picture = map_africa
         potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
             civilized = yes
             has_global_flag = guine_bissau_organized
             owns = 1877
@@ -5933,29 +5451,27 @@ political_decisions = {
                 exists = no
                 NOT = { is_culture_group = THIS }
             }
-            NOT = {
-                has_country_flag = guine_bissau_master
-                capital_scope = { continent = africa }
-            }
+            NOT = { AND = {
+					capital_scope = { continent = africa }
+					NOT = { tag = SAF }
+				} }
         }
 
         allow = {
             war = no
-            machine_guns = 1
-            market_regulations = 1
+            revolution_n_counterrevolution = 1
             owns = 1877
             owns = 1878
         }
 
         effect = {
-            any_country = {
-                limit = { has_country_flag = guine_bissau_master }
-                clr_country_flag = guine_bissau_master
-            }
-            set_country_flag = guine_bissau_master
             prestige = 3
-            country_event = 199065
-
+            any_pop = {
+                limit = {
+                    location = { is_core = GBU }
+                }
+                militancy = -3
+            }
             GBU = {
                 primary_culture = THIS
                 clr_country_flag = sunni_country
@@ -6008,40 +5524,45 @@ political_decisions = {
     }
 
     organize_madagascar = {
-        picture = map_madagascar
+        picture = map_africa
         potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
             civilized = yes
             NOT = {
                 exists = MAD
                 has_global_flag = madagascar_organized
-                capital_scope = { continent = africa }
+                AND = {
+					capital_scope = { continent = africa }
+					NOT = { tag = SAF }
+				}
             }
             owns = 2115
         }
 
         allow = {
             war = no
-            machine_guns = 1
-            market_regulations = 1
+            revolution_n_counterrevolution = 1
             owns = 2115
             owns = 2116
         }
 
         effect = {
             set_global_flag = madagascar_organized
-            prestige = 5
-            set_country_flag = madagascar_master
-            country_event = 199066
+
+            prestige = 1
+
+            any_owned = {
+                limit = { is_core = MAD }
+                add_province_modifier = {
+                    name = colonial_exploitation
+                    duration = 1095
+                }
+            }
 
             MAD = {
                 set_country_flag = post_colonial_country
                 primary_culture = THIS
                 add_accepted_culture = malagasy
-                tech_school = developing_tech_school
+                tech_school = unciv_tech_school
                 clr_country_flag = sunni_country
                 clr_country_flag = shiite_country
                 clr_country_flag = ibadi_country
@@ -6084,12 +5605,8 @@ political_decisions = {
     }
 
     reorganize_madagascar = {
-        picture = map_madagascar
+        picture = map_africa
         potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
             civilized = yes
             has_global_flag = madagascar_organized
             owns = 2115
@@ -6097,28 +5614,27 @@ political_decisions = {
                 exists = no
                 NOT = { is_culture_group = THIS }
             }
-            NOT = { capital_scope = { continent = africa } }
+            NOT = { AND = {
+					capital_scope = { continent = africa }
+					NOT = { tag = SAF }
+				} }
         }
 
         allow = {
             war = no
-            machine_guns = 1
-            market_regulations = 1
+            revolution_n_counterrevolution = 1
             owns = 2115
             owns = 2116
         }
 
         effect = {
             prestige = 3
-
-            any_country = {
-                limit = { has_country_flag = madagascar_master }
-                clr_country_flag = madagascar_master
+            any_pop = {
+                limit = {
+                    location = { is_core = MAD }
+                }
+                militancy = -3
             }
-            set_country_flag = madagascar_master
-
-            country_event = 199066
-
             MAD = {
                 primary_culture = THIS
                 clr_country_flag = sunni_country
@@ -6162,43 +5678,44 @@ political_decisions = {
         }
     }
 
+
     organize_zimbabwe = {
-        picture = map_zimbabwe
+        picture = map_africa
         potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
             civilized = yes
             NOT = {
                 exists = ZBW
                 has_global_flag = zimbabwe_organized
-                capital_scope = { continent = africa }
+                AND = {
+					capital_scope = { continent = africa }
+					NOT = { tag = SAF }
+				}
                 tag = SAF
             }
             owns = 2068
+            NOT = { has_country_flag = ian_would_be_proud }
         }
 
         allow = {
             war = no
-            machine_guns = 1
-            market_regulations = 1
+            mass_politics = 1
             owns = 2068
         }
 
         effect = {
-
             set_global_flag = zimbabwe_organized
-            prestige = 5
-            set_country_flag = zimbabwe_master
-            country_event = 199067
-
-            ZBW = { all_core = { remove_core = MAT } }
+            prestige = 3
+            ZBW = {
+                all_core = {
+                    remove_core = MAT
+                    add_province_modifier = { name = colonial_exploitation duration = 1095 }
+                }
+            }
             ZBW = {
                 set_country_flag = post_colonial_country
                 primary_culture = THIS
                 add_accepted_culture = shona
-                tech_school = developing_tech_school
+                tech_school = unciv_tech_school
                 clr_country_flag = sunni_country
                 clr_country_flag = shiite_country
                 clr_country_flag = ibadi_country
@@ -6241,12 +5758,8 @@ political_decisions = {
     }
 
     reorganize_zimbabwe = {
-        picture = map_zimbabwe
+        picture = map_africa
         potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
             civilized = yes
             has_global_flag = zimbabwe_organized
             owns = 2068
@@ -6254,30 +5767,28 @@ political_decisions = {
                 exists = no
                 NOT = { is_culture_group = THIS }
             }
-            NOT = {
-                has_country_flag = zimbabwe_master
-                capital_scope = { continent = africa }
-            }
+            NOT = { AND = {
+					capital_scope = { continent = africa }
+					NOT = { tag = SAF }
+				} }
+            NOT = { has_country_flag = ian_would_be_proud }
         }
 
         allow = {
             war = no
-            machine_guns = 1
-            market_regulations = 1
+            revolution_n_counterrevolution = 1
             owns = 2068
-            owns = 2069
         }
 
         effect = {
             prestige = 3
-            country_event = 199067
 
-            any_country = {
-                limit = { has_country_flag = zimbabwe_master }
-                clr_country_flag = zimbabwe_master
+            any_pop = {
+                limit = {
+                    location = { is_core = ZBW }
+                }
+                militancy = -3
             }
-            set_country_flag = zimbabwe_master
-
             ZBW = {
                 primary_culture = THIS
                 clr_country_flag = sunni_country
@@ -6329,301 +5840,10 @@ political_decisions = {
         }
     }
 
-    organize_rwanda_burundi = {
-        picture = map_rwanda
-        potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
-            civilized = yes
-            NOT = {
-                OR = {
-                    exists = BRD
-                    exists = RWA
-                }
-                has_global_flag = rwanda_burundi_organized
-                has_country_flag = rwanda_burundi_master
-                capital_scope = { continent = africa }
-            }
-            OR = {
-                owns = 2034
-                owns = 2035
-            }
-        }
-
-        allow = {
-            war = no
-            machine_guns = 1
-            market_regulations = 1
-            owns = 2034
-            owns = 2035
-        }
-
-        effect = {
-
-            set_global_flag = rwanda_burundi_organized
-            prestige = 5
-            set_country_flag = rwanda_burundi_master
-            country_event = 199068
-
-            random_country = {
-                limit = {
-                    capital_scope = { owned_by = THIS }
-                    tag = BRD
-                    exists = no
-                }
-                set_country_flag = post_colonial_country
-                primary_culture = THIS
-                tech_school = developing_tech_school
-                clr_country_flag = sunni_country
-                clr_country_flag = shiite_country
-                clr_country_flag = ibadi_country
-                clr_country_flag = catholic_country
-                clr_country_flag = protestant_country
-                clr_country_flag = mormon_country
-                clr_country_flag = orthodox_country
-                clr_country_flag = coptic_country
-                clr_country_flag = jewish_country
-                clr_country_flag = yazidi_country
-                clr_country_flag = mahayana_country
-                clr_country_flag = gelugpa_country
-                clr_country_flag = theravada_country
-                clr_country_flag = hindu_country
-                clr_country_flag = shinto_country
-                clr_country_flag = sikh_country
-                clr_country_flag = animist_country
-            }
-
-            random_country = {
-                limit = {
-                    capital_scope = { owned_by = THIS }
-                    tag = RWA
-                    exists = no
-                }
-                set_country_flag = post_colonial_country
-                primary_culture = THIS
-                tech_school = developing_tech_school
-                clr_country_flag = sunni_country
-                clr_country_flag = shiite_country
-                clr_country_flag = ibadi_country
-                clr_country_flag = catholic_country
-                clr_country_flag = protestant_country
-                clr_country_flag = mormon_country
-                clr_country_flag = orthodox_country
-                clr_country_flag = coptic_country
-                clr_country_flag = jewish_country
-                clr_country_flag = yazidi_country
-                clr_country_flag = mahayana_country
-                clr_country_flag = gelugpa_country
-                clr_country_flag = theravada_country
-                clr_country_flag = hindu_country
-                clr_country_flag = shinto_country
-                clr_country_flag = sikh_country
-                clr_country_flag = animist_country
-            }
-
-            random_owned = { limit = { province_id = 2035 owner = { has_country_flag = catholic_country } } BRD = { religion = catholic set_country_flag = catholic_country } }
-            random_owned = {
-                limit = { province_id = 2035 owner = { has_country_flag = protestant_country } }
-                BRD = { religion = protestant set_country_flag = protestant_country }
-            }
-            random_owned = { limit = { province_id = 2035 owner = { has_country_flag = orthodox_country } } BRD = { religion = orthodox set_country_flag = orthodox_country } }
-            random_owned = { limit = { province_id = 2035 owner = { has_country_flag = mormon_country } } BRD = { religion = mormon set_country_flag = mormon_country } }
-            random_owned = { limit = { province_id = 2035 owner = { has_country_flag = coptic_country } } BRD = { religion = coptic set_country_flag = coptic_country } }
-            random_owned = { limit = { province_id = 2035 owner = { has_country_flag = sunni_country } } BRD = { religion = sunni set_country_flag = sunni_country } }
-            random_owned = { limit = { province_id = 2035 owner = { has_country_flag = shiite_country } } BRD = { religion = shiite set_country_flag = shiite_country } }
-            random_owned = { limit = { province_id = 2035 owner = { has_country_flag = shinto_country } } BRD = { religion = shinto set_country_flag = shinto_country } }
-            random_owned = { limit = { province_id = 2035 owner = { has_country_flag = mahayana_country } } BRD = { religion = mahayana set_country_flag = mahayana_country } }
-            random_owned = { limit = { province_id = 2035 owner = { has_country_flag = gelugpa_country } } BRD = { religion = gelugpa set_country_flag = gelugpa_country } }
-            random_owned = { limit = { province_id = 2035 owner = { has_country_flag = theravada_country } } BRD = { religion = theravada set_country_flag = theravada_country } }
-            random_owned = { limit = { province_id = 2035 owner = { has_country_flag = hindu_country } } BRD = { religion = hindu set_country_flag = hindu_country } }
-            random_owned = { limit = { province_id = 2035 owner = { has_country_flag = sikh_country } } BRD = { religion = sikh set_country_flag = sikh_country } }
-            random_owned = { limit = { province_id = 2035 owner = { has_country_flag = jewish_country } } BRD = { religion = jewish set_country_flag = jewish_country } }
-            random_owned = { limit = { province_id = 2035 owner = { has_country_flag = ibadi_country } } BRD = { religion = ibadi set_country_flag = ibadi_country } }
-            random_owned = { limit = { province_id = 2035 owner = { has_country_flag = yazidi_country } } BRD = { religion = yazidi set_country_flag = yazidi_country } }
-
-            random_owned = { limit = { province_id = 2034 owner = { has_country_flag = catholic_country } } RWA = { religion = catholic set_country_flag = catholic_country } }
-            random_owned = {
-                limit = { province_id = 2034 owner = { has_country_flag = protestant_country } }
-                RWA = { religion = protestant set_country_flag = protestant_country }
-            }
-            random_owned = { limit = { province_id = 2034 owner = { has_country_flag = orthodox_country } } RWA = { religion = orthodox set_country_flag = orthodox_country } }
-            random_owned = { limit = { province_id = 2034 owner = { has_country_flag = mormon_country } } RWA = { religion = mormon set_country_flag = mormon_country } }
-            random_owned = { limit = { province_id = 2034 owner = { has_country_flag = coptic_country } } RWA = { religion = coptic set_country_flag = coptic_country } }
-            random_owned = { limit = { province_id = 2034 owner = { has_country_flag = sunni_country } } RWA = { religion = sunni set_country_flag = sunni_country } }
-            random_owned = { limit = { province_id = 2034 owner = { has_country_flag = shiite_country } } RWA = { religion = shiite set_country_flag = shiite_country } }
-            random_owned = { limit = { province_id = 2034 owner = { has_country_flag = shinto_country } } RWA = { religion = shinto set_country_flag = shinto_country } }
-            random_owned = { limit = { province_id = 2034 owner = { has_country_flag = mahayana_country } } RWA = { religion = mahayana set_country_flag = mahayana_country } }
-            random_owned = { limit = { province_id = 2034 owner = { has_country_flag = gelugpa_country } } RWA = { religion = gelugpa set_country_flag = gelugpa_country } }
-            random_owned = { limit = { province_id = 2034 owner = { has_country_flag = theravada_country } } RWA = { religion = theravada set_country_flag = theravada_country } }
-            random_owned = { limit = { province_id = 2034 owner = { has_country_flag = hindu_country } } RWA = { religion = hindu set_country_flag = hindu_country } }
-            random_owned = { limit = { province_id = 2034 owner = { has_country_flag = sikh_country } } RWA = { religion = sikh set_country_flag = sikh_country } }
-            random_owned = { limit = { province_id = 2034 owner = { has_country_flag = jewish_country } } RWA = { religion = jewish set_country_flag = jewish_country } }
-            random_owned = { limit = { province_id = 2034 owner = { has_country_flag = ibadi_country } } RWA = { religion = ibadi set_country_flag = ibadi_country } }
-            random_owned = { limit = { province_id = 2034 owner = { has_country_flag = yazidi_country } } RWA = { religion = yazidi set_country_flag = yazidi_country } }
-        }
-    }
-
-    reorganize_rwanda_burundi = {
-        picture = map_rwanda
-        potential = {
-            OR = {
-                has_country_flag = organize_colony_decisions
-                ai = yes
-            }
-            civilized = yes
-            has_global_flag = rwanda_burundi_organized
-            OR = {
-                AND = {
-                    owns = 2034
-                    RWA = {
-                        exists = no
-                        NOT = { is_culture_group = THIS }
-                    }
-                }
-                AND = {
-                    owns = 2035
-                    BRD = {
-                        exists = no
-                        NOT = { is_culture_group = THIS }
-                    }
-                }
-            }
-
-            NOT = {
-                has_country_flag = rwanda_burundi_master
-                capital_scope = { continent = africa }
-            }
-        }
-
-        allow = {
-            war = no
-            machine_guns = 1
-            market_regulations = 1
-            owns = 2034
-            owns = 2035
-        }
-
-        effect = {
-            prestige = 3
-            country_event = 199068
-
-            any_country = {
-                limit = { has_country_flag = rwanda_burundi_master }
-                clr_country_flag = rwanda_burundi_master
-            }
-            set_country_flag = rwanda_burundi_master
-
-            random_country = {
-                limit = {
-                    capital_scope = { owned_by = THIS }
-                    tag = BRD
-                    exists = no
-                }
-                set_country_flag = post_colonial_country
-                primary_culture = THIS
-                tech_school = developing_tech_school
-                clr_country_flag = sunni_country
-                clr_country_flag = shiite_country
-                clr_country_flag = ibadi_country
-                clr_country_flag = catholic_country
-                clr_country_flag = protestant_country
-                clr_country_flag = mormon_country
-                clr_country_flag = orthodox_country
-                clr_country_flag = coptic_country
-                clr_country_flag = jewish_country
-                clr_country_flag = yazidi_country
-                clr_country_flag = mahayana_country
-                clr_country_flag = gelugpa_country
-                clr_country_flag = theravada_country
-                clr_country_flag = hindu_country
-                clr_country_flag = shinto_country
-                clr_country_flag = sikh_country
-                clr_country_flag = animist_country
-            }
-
-            random_country = {
-                limit = {
-                    capital_scope = { owned_by = THIS }
-                    tag = RWA
-                    exists = no
-                }
-                set_country_flag = post_colonial_country
-                primary_culture = THIS
-                tech_school = developing_tech_school
-                clr_country_flag = sunni_country
-                clr_country_flag = shiite_country
-                clr_country_flag = ibadi_country
-                clr_country_flag = catholic_country
-                clr_country_flag = protestant_country
-                clr_country_flag = mormon_country
-                clr_country_flag = orthodox_country
-                clr_country_flag = coptic_country
-                clr_country_flag = jewish_country
-                clr_country_flag = yazidi_country
-                clr_country_flag = mahayana_country
-                clr_country_flag = gelugpa_country
-                clr_country_flag = theravada_country
-                clr_country_flag = hindu_country
-                clr_country_flag = shinto_country
-                clr_country_flag = sikh_country
-                clr_country_flag = animist_country
-            }
-
-            random_owned = { limit = { province_id = 2035 owner = { has_country_flag = catholic_country } } BRD = { religion = catholic set_country_flag = catholic_country } }
-            random_owned = {
-                limit = { province_id = 2035 owner = { has_country_flag = protestant_country } }
-                BRD = { religion = protestant set_country_flag = protestant_country }
-            }
-            random_owned = { limit = { province_id = 2035 owner = { has_country_flag = orthodox_country } } BRD = { religion = orthodox set_country_flag = orthodox_country } }
-            random_owned = { limit = { province_id = 2035 owner = { has_country_flag = mormon_country } } BRD = { religion = mormon set_country_flag = mormon_country } }
-            random_owned = { limit = { province_id = 2035 owner = { has_country_flag = coptic_country } } BRD = { religion = coptic set_country_flag = coptic_country } }
-            random_owned = { limit = { province_id = 2035 owner = { has_country_flag = sunni_country } } BRD = { religion = sunni set_country_flag = sunni_country } }
-            random_owned = { limit = { province_id = 2035 owner = { has_country_flag = shiite_country } } BRD = { religion = shiite set_country_flag = shiite_country } }
-            random_owned = { limit = { province_id = 2035 owner = { has_country_flag = shinto_country } } BRD = { religion = shinto set_country_flag = shinto_country } }
-            random_owned = { limit = { province_id = 2035 owner = { has_country_flag = mahayana_country } } BRD = { religion = mahayana set_country_flag = mahayana_country } }
-            random_owned = { limit = { province_id = 2035 owner = { has_country_flag = gelugpa_country } } BRD = { religion = gelugpa set_country_flag = gelugpa_country } }
-            random_owned = { limit = { province_id = 2035 owner = { has_country_flag = theravada_country } } BRD = { religion = theravada set_country_flag = theravada_country } }
-            random_owned = { limit = { province_id = 2035 owner = { has_country_flag = hindu_country } } BRD = { religion = hindu set_country_flag = hindu_country } }
-            random_owned = { limit = { province_id = 2035 owner = { has_country_flag = sikh_country } } BRD = { religion = sikh set_country_flag = sikh_country } }
-            random_owned = { limit = { province_id = 2035 owner = { has_country_flag = jewish_country } } BRD = { religion = jewish set_country_flag = jewish_country } }
-            random_owned = { limit = { province_id = 2035 owner = { has_country_flag = ibadi_country } } BRD = { religion = ibadi set_country_flag = ibadi_country } }
-            random_owned = { limit = { province_id = 2035 owner = { has_country_flag = yazidi_country } } BRD = { religion = yazidi set_country_flag = yazidi_country } }
-
-            random_owned = { limit = { province_id = 2034 owner = { has_country_flag = catholic_country } } RWA = { religion = catholic set_country_flag = catholic_country } }
-            random_owned = {
-                limit = { province_id = 2034 owner = { has_country_flag = protestant_country } }
-                RWA = { religion = protestant set_country_flag = protestant_country }
-            }
-            random_owned = { limit = { province_id = 2034 owner = { has_country_flag = orthodox_country } } RWA = { religion = orthodox set_country_flag = orthodox_country } }
-            random_owned = { limit = { province_id = 2034 owner = { has_country_flag = mormon_country } } RWA = { religion = mormon set_country_flag = mormon_country } }
-            random_owned = { limit = { province_id = 2034 owner = { has_country_flag = coptic_country } } RWA = { religion = coptic set_country_flag = coptic_country } }
-            random_owned = { limit = { province_id = 2034 owner = { has_country_flag = sunni_country } } RWA = { religion = sunni set_country_flag = sunni_country } }
-            random_owned = { limit = { province_id = 2034 owner = { has_country_flag = shiite_country } } RWA = { religion = shiite set_country_flag = shiite_country } }
-            random_owned = { limit = { province_id = 2034 owner = { has_country_flag = shinto_country } } RWA = { religion = shinto set_country_flag = shinto_country } }
-            random_owned = { limit = { province_id = 2034 owner = { has_country_flag = mahayana_country } } RWA = { religion = mahayana set_country_flag = mahayana_country } }
-            random_owned = { limit = { province_id = 2034 owner = { has_country_flag = gelugpa_country } } RWA = { religion = gelugpa set_country_flag = gelugpa_country } }
-            random_owned = { limit = { province_id = 2034 owner = { has_country_flag = theravada_country } } RWA = { religion = theravada set_country_flag = theravada_country } }
-            random_owned = { limit = { province_id = 2034 owner = { has_country_flag = hindu_country } } RWA = { religion = hindu set_country_flag = hindu_country } }
-            random_owned = { limit = { province_id = 2034 owner = { has_country_flag = sikh_country } } RWA = { religion = sikh set_country_flag = sikh_country } }
-            random_owned = { limit = { province_id = 2034 owner = { has_country_flag = jewish_country } } RWA = { religion = jewish set_country_flag = jewish_country } }
-            random_owned = { limit = { province_id = 2034 owner = { has_country_flag = ibadi_country } } RWA = { religion = ibadi set_country_flag = ibadi_country } }
-            random_owned = { limit = { province_id = 2034 owner = { has_country_flag = yazidi_country } } RWA = { religion = yazidi set_country_flag = yazidi_country } }
-        }
-
-        ai_will_do = {
-            factor = 1
-            modifier = {
-                factor = 0
-                NOT = { year = 1905 }
-            }
-        }
-    }
-
     conquest_of_the_saharan_desert = {
         picture = form_the_ikhwan
         potential = {
+            has_global_flag = berlin_conference
             exists = yes
             OR = {
                 AND = {
@@ -6635,7 +5855,7 @@ political_decisions = {
                     2585 = { empty = yes }
                 }
                 AND = {
-                    owns = 1761
+                    owns = 1765
                     1758 = { empty = yes }
                 }
                 AND = {
@@ -6662,10 +5882,14 @@ political_decisions = {
         }
 
         allow = {
+            war = no
             OR = {
                 invention = the_dark_continent
                 AND = {
-                    capital_scope = { continent = africa }
+                    AND = {
+					capital_scope = { continent = africa }
+					NOT = { tag = SAF }
+				}
                     civilized = yes
                 }
                 AND = {
@@ -6685,7 +5909,7 @@ political_decisions = {
                     2585 = { empty = yes }
                 }
                 AND = {
-                    owns = 1761
+                    owns = 1765
                     1758 = { empty = yes }
                     OR = {
                         2564 = { empty = no }
@@ -6697,16 +5921,10 @@ political_decisions = {
                     1742 = { empty = yes }
                     2585 = { empty = no }
                 }
-                AND = {
-                    owns = 1838
-                    1739 = { empty = yes }
-                    2564 = { empty = no }
-                }
             }
         }
 
         effect = {
-            #Owner of Waddai gets Chad
             random_owned = {
                 limit = {
                     owner = {
@@ -6715,7 +5933,10 @@ political_decisions = {
                         OR = {
                             invention = the_dark_continent
                             AND = {
-                                capital_scope = { continent = africa }
+                                AND = {
+					capital_scope = { continent = africa }
+					NOT = { tag = SAF }
+				}
                                 civilized = yes
                             }
                         }
@@ -6727,7 +5948,6 @@ political_decisions = {
                 1826 = { secede_province = THIS any_pop = { literacy = -0.99 } }
                 owner = { prestige = 1 }
             }
-            #Owner of Outer Hausaland gets Niger
             random_owned = {
                 limit = {
                     owner = {
@@ -6736,18 +5956,21 @@ political_decisions = {
                         OR = {
                             invention = the_dark_continent
                             AND = {
-                                capital_scope = { continent = africa }
+                                AND = {
+					capital_scope = { continent = africa }
+					NOT = { tag = SAF }
+				}
                                 civilized = yes
                             }
                         }
                     }
                 }
                 1812 = { secede_province = THIS any_pop = { literacy = -0.99 } }
+                1813 = { secede_province = THIS any_pop = { literacy = -0.99 } }
                 1814 = { secede_province = THIS any_pop = { literacy = -0.99 } }
                 1817 = { secede_province = THIS any_pop = { literacy = -0.99 } }
                 owner = { prestige = 1 }
             }
-            #Owner of Timbuktu gets rest of Timbuktu state
             random_owned = {
                 limit = {
                     owner = {
@@ -6756,7 +5979,10 @@ political_decisions = {
                         OR = {
                             invention = the_dark_continent
                             AND = {
-                                capital_scope = { continent = africa }
+                                AND = {
+					capital_scope = { continent = africa }
+					NOT = { tag = SAF }
+				}
                                 civilized = yes
                             }
                         }
@@ -6766,7 +5992,6 @@ political_decisions = {
                 1807 = { secede_province = THIS any_pop = { literacy = -0.99 } }
                 owner = { prestige = 1 }
             }
-            #Owner of Mauretania gets the rest of Mauretania
             random_owned = {
                 limit = {
                     owner = {
@@ -6775,7 +6000,10 @@ political_decisions = {
                         OR = {
                             invention = the_dark_continent
                             AND = {
-                                capital_scope = { continent = africa }
+                                AND = {
+					capital_scope = { continent = africa }
+					NOT = { tag = SAF }
+				}
                                 civilized = yes
                             }
                         }
@@ -6785,7 +6013,6 @@ political_decisions = {
                 1781 = { secede_province = THIS any_pop = { literacy = -0.99 } }
                 owner = { prestige = 1 }
             }
-            #Owner of Murzuk gets Wath, Libya
             random_owned = {
                 limit = {
                     owner = {
@@ -6797,7 +6024,6 @@ political_decisions = {
                 1742 = { secede_province = THIS add_core = TRI any_pop = { literacy = -0.99 } }
                 owner = { prestige = 1 }
             }
-            #Owner of Murzuk gets Wath, Libya
             random_owned = {
                 limit = {
                     owner = {
@@ -6809,7 +6035,7 @@ political_decisions = {
                 1742 = { secede_province = THIS add_core = LBY any_pop = { literacy = -0.99 } }
                 owner = { prestige = 1 }
             }
-            #Owner of Al Jaghbub gets Al Jawf, Libya
+
             random_owned = {
                 limit = {
                     owner = {
@@ -6821,7 +6047,6 @@ political_decisions = {
                 2585 = { secede_province = THIS add_core = CYR any_pop = { literacy = -0.99 } }
                 owner = { prestige = 1 }
             }
-            #Owner of Al Jaghbub gets Al Jawf, Libya
             random_owned = {
                 limit = {
                     owner = {
@@ -6839,20 +6064,18 @@ political_decisions = {
             }
             random_owned = {
                 limit = { owner = { 1738 = { owned_by = THIS is_core = THIS } } }
-                2585 = { add_core = THIS add_core = CYR }
+                2585 = { add_core = THIS }
             }
-            #Owner of Baris gets Farafra, Egypt
             random_owned = {
                 limit = {
                     owner = {
-                        owns = 1761
+                        owns = 1765
                         1758 = { empty = yes }
                     }
                 }
                 1758 = { secede_province = THIS add_core = EGY any_pop = { literacy = -0.99 } }
                 owner = { prestige = 1 }
             }
-            #Owner of Dongola gets Salima, Sudan
             random_owned = {
                 limit = {
                     owner = {
@@ -6864,7 +6087,7 @@ political_decisions = {
                 owner = { prestige = 1 }
             }
             random_owned = {
-                limit = { owner = { 1761 = { owned_by = THIS is_core = THIS } } }
+                limit = { owner = { 1765 = { owned_by = THIS is_core = THIS } } }
                 1758 = { add_core = THIS }
                 owner = { prestige = 1 }
             }
@@ -6872,46 +6095,6 @@ political_decisions = {
                 limit = { owner = { 1835 = { owned_by = THIS is_core = THIS } } }
                 2564 = { add_core = THIS }
                 owner = { prestige = 1 }
-            }
-            #Acquiring Empty Kordofan, Sudan
-            random_owned = {
-                limit = { province_id = 1838 }
-                random_empty_neighbor_province = {
-                    limit = { province_id = 1739 }
-                    secede_province = THIS
-                    add_core = SUD
-                    any_pop = { literacy = -0.99 }
-                }
-            }
-
-            random_owned = {
-                limit = { province_id = 1840 }
-                random_empty_neighbor_province = {
-                    limit = { province_id = 1839 }
-                    secede_province = THIS
-                    add_core = SUD
-                    any_pop = { literacy = -0.99 }
-                }
-            }
-
-            random_owned = {
-                limit = { province_id = 1739 }
-                random_empty_neighbor_province = {
-                    limit = { province_id = 1842 }
-                    secede_province = THIS
-                    add_core = SUD
-                    any_pop = { literacy = -0.99 }
-                }
-            }
-
-            random_owned = {
-                limit = { province_id = 1739 }
-                random_empty_neighbor_province = {
-                    limit = { province_id = 1841 }
-                    secede_province = THIS
-                    add_core = SUD
-                    any_pop = { literacy = -0.99 }
-                }
             }
         }
         ai_will_do = { factor = 1 }
